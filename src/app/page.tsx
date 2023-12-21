@@ -1,13 +1,17 @@
 import { GameCard } from '@/components/game-card'
 import Link from 'next/link'
+import getGamesList from '../mocks/game-list.json'
 
 export default function HomePage() {
+  const { data } = getGamesList
+  console.log(data)
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-white dark:bg-black">
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
         <div>
-          <h1 className="text-5xl font-extrabold tracking-tight text-green-400 sm:text-[8rem]">
-            28,379
+          <h1 className="text-5xl font-extrabold tracking-tight text-red-300 sm:text-[8rem]">
+            28,378
           </h1>
           <h2 className="pr-2 text-right text-xl font-bold">Guilty Gears</h2>
         </div>
@@ -25,7 +29,13 @@ export default function HomePage() {
               result. Believe in victory.
             </div>
           </Link>
-          <GameCard />
+          <div className="pt-10">
+            {data.map(({ steamId }) => (
+              <div key={steamId}>
+                <GameCard steamId={steamId} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </main>

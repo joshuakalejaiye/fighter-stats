@@ -1,0 +1,112 @@
+{
+  "data": [
+    {
+      "name": "GUILTY GEAR -STRIVE-",
+      "steamId": "1384160",
+      "playerCountTitle": "guilty gears",
+      "release_date": {
+        "coming_soon": false,
+        "date": "01/jan./2020"
+      }
+    },
+    {
+      "name": "GUILTY GEAR XX ACCENT CORE PLUS R",
+      "steamId": "348550",
+      "playerCountTitle": "guilty gears",
+      "release_date": {
+        "coming_soon": false,
+        "date": "01/jan./2020"
+      }
+    },
+    {
+      "name": "GUILTY GEAR Xrd REV 2",
+      "steamId": "520440",
+      "playerCountTitle": "guilty gears",
+      "release_date": {
+        "coming_soon": false,
+        "date": "01/jan./2020"
+      }
+    },
+    {
+      "name": "Granblue Fantasy Versus: Rising",
+      "steamId": "2157560",
+      "playerCountTitle": "skyfarers",
+      "release_date": {
+        "coming_soon": false,
+        "date": "15/dec./2024"
+      }
+    },
+    {
+      "name": "DNF Duel",
+      "steamId": "1216060",
+      "playerCountTitle": "dungeon fighters",
+      "release_date": {
+        "coming_soon": false,
+        "date": "2022"
+      }
+    },
+    {
+      "name": "UNDER NIGHT IN-BIRTH II Sys:Celes",
+      "steamId": "2076010",
+      "playerCountTitle": "under night players",
+      "release_date": {
+        "coming_soon": true,
+        "date": "2024"
+      }
+    },
+    {
+      "name": "Street Fighter™ 6",
+      "steamId": "1364780",
+      "playerCountTitle": "out on the streets",
+      "release_date": {
+        "coming_soon": false,
+        "date": "01/jan./2020"
+      }
+    },
+    {
+      "name": "Street Fighter V",
+      "steamId": "310950",
+      "playerCountTitle": "on the streets of V",
+      "release_date": {
+        "coming_soon": false,
+        "date": "01/jan./2020"
+      }
+    },
+    {
+      "name": "TEKKEN 7",
+      "steamId": "389730",
+      "playerCountTitle": "iron fist entrants",
+      "release_date": {
+        "coming_soon": false,
+        "date": "01/jan./2020"
+      }
+    },
+    {
+      "name": "TEKKEN 8",
+      "steamId": "1778820",
+      "playerCountTitle": "iron fist entrants",
+      "release_date": {
+        "coming_soon": true,
+        "date": "25/jan./2024"
+      }
+    },
+    {
+      "name": "SOULCALIBUR VI",
+      "steamId": "544750",
+      "playerCountTitle": "soul warriors",
+      "release_date": {
+        "coming_soon": false,
+        "date": "01/jan./2020"
+      }
+    },
+    {
+      "name": "Rivals 2",
+      "steamId": "2217000",
+      "playerCountTitle": "rivals brawling",
+      "release_date": {
+        "coming_soon": true,
+        "date": "2024"
+      }
+    }
+  ]
+}

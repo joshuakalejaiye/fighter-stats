@@ -9,7 +9,7 @@ const config = {
   bracketSpacing: true,
   arrowParens: 'always',
   endOfLine: 'lf',
-  plugins: ["prettier-plugin-tailwindcss"],
-};
+  plugins: ['prettier-plugin-tailwindcss'],
+}
 
-export default config;
+export default config

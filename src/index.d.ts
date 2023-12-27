@@ -62,4 +62,9 @@ interface GameData {
   };
 }
 
-// Define other interfaces like Requirements, Demo, PriceOverview, etc. based on their structure in JSON
+interface PlayerCountResponse {
+  response: {
+    player_count: number,
+    result: number
+  }
+}

@@ -1,12 +1,24 @@
+import { env } from '@/env'
 import mockedGamesData from '../mocks/game-list.json'
 
 export async function getHomepageGames(): Promise<SupportedGame[]> {
-    // this needs to be json lol
+    // needs to be an object that not only says what games to render but gives data about them
     return Promise.resolve(['2157560', '1364780', '1778820'])
 }
 
 export async function getBannerImageURL({steamId}: { steamId: string }) {
     return Promise.resolve(`https://cdn.akamai.steamstatic.com/steam/apps/${steamId}/header.jpg`)
+}
+
+export async function getPlayerCount({steamId}: { steamId: string }) {
+    const response = await fetch(`http://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key=${env.STEAM_API_KEY}&appid=${steamId}`)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const data: PlayerCountResponse = await response.json()
+    
+    const playerCount = data.response.player_count
+
+    //DO NOT LEAVE THIS UNCACHED FOREVER, IT NEEDS TO BE IN A KV DATABASE THAT IS UPDATED EVERY HOUR
+    return Promise.resolve(playerCount)
 }
 
 export async function getPlayerCountTitle({steamId}: { steamId: string }) {
@@ -42,6 +54,7 @@ export async function getGameData({steamId, mocked = false}: { steamId: string, 
             id: steamId,
             name:  mock.name,
             image: await getBannerImageURL({steamId}),
+            playerCount: '000000',
             playerCountTitle: mock.playerCountTitle, //delegate
             releaseDate: mock.release_date,
             link: `https://store.steampowered.com/app/${steamId}/`
@@ -58,6 +71,7 @@ export async function getGameData({steamId, mocked = false}: { steamId: string, 
         id: steamId,
         name:  originalGameData?.data.name,
         image: await getBannerImageURL({steamId}),
+        playerCount: await getPlayerCount({steamId}),
         playerCountTitle: await getPlayerCountTitle({steamId}), //delegate
         releaseDate: originalGameData?.data.release_date,
         link: `https://store.steampowered.com/app/${steamId}/`

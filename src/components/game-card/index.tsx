@@ -38,7 +38,7 @@ export async function GameCard({
         <CardContent className="min-h-16">
           <div className="flex flex-col p-0">
             <p className="text-3xl font-extrabold tracking-tight text-green-500 sm:text-[2em]">
-              28,378
+              {gameData?.playerCount?.toLocaleString(undefined)}
             </p>
             <p className="pr-1 text-right text-lg font-bold sm:text-xl">
               {gameData?.playerCountTitle}

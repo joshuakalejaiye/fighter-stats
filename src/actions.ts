@@ -21,7 +21,7 @@ export async function getBannerData(): Promise<{totalPlayerCount: number, player
 
     // DO NOT LEAVE THIS AS A MANUAL CALCULATION ON NAVIGATION
     // THIS SHOULD BE CALCULATED FROM THE VALUES IN THE DB.
-    return Promise.resolve({totalPlayerCount: gamesData.data[0]?.playerCount ?? 0, playerCountTitle: gamesData.data[0]?.playerCountTitle ?? ''})
+    return Promise.resolve({totalPlayerCount: gamesData.totalPlayerCount ?? 0, playerCountTitle: gamesData.data[0]?.playerCountTitle ?? ''})
 }
 
 export async function getPlayerCount({steamId}: { steamId: SupportedGame }) {

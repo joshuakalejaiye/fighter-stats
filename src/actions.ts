@@ -3,6 +3,7 @@
 import { env } from '@/env'
 import mockedGamesData from './mocks/game-list.json'
 import { DNF_DUEL, GBVSR, GG_PLUS_R, GG_STRIVE, GG_XRD_REV2, RIVALS_2, SF6, SFV, SOULCALIBUR_VI, SupportedGame, TEKKEN_7, TEKKEN_8, UNI_2 } from '@/index.enums'
+import { abort } from 'process'
 
 export async function getHomepageGames(): Promise<SupportedGame[]> {
     const { GBVSR, SF6, TEKKEN_7 } = SupportedGame
@@ -15,29 +16,12 @@ export async function getBannerImageURL({steamId}: { steamId: SupportedGame }) {
     return Promise.resolve(`https://cdn.akamai.steamstatic.com/steam/apps/${steamId}/header.jpg`)
 }
 
-export async function getBannerData(): Promise<{totalPlayerCount: number, mostPopularId: SupportedGame}> {
-    let totalPlayerCount = 0; 
-    let highestRecorded = 0; 
-    let mostPopularId = SF6;
-
-    for (const id in SupportedGame) { 
-        const steamId: SupportedGame = Number(id)
-        const playerCount = await getPlayerCount({ steamId })
-
-        if (steamId && playerCount) {
-            console.log(steamId, playerCount)
-            totalPlayerCount += playerCount
-            
-            if (playerCount > highestRecorded) {
-                mostPopularId = steamId
-                highestRecorded = playerCount
-            }
-        }
-    }
+export async function getBannerData(): Promise<{totalPlayerCount: number, playerCountTitle: string}> {
+    const gamesData = await getGamesData()
 
     // DO NOT LEAVE THIS AS A MANUAL CALCULATION ON NAVIGATION
     // THIS SHOULD BE CALCULATED FROM THE VALUES IN THE DB.
-    return Promise.resolve({totalPlayerCount, mostPopularId})
+    return Promise.resolve({totalPlayerCount: gamesData.data[0]?.playerCount ?? 0, playerCountTitle: gamesData.data[0]?.playerCountTitle ?? ''})
 }
 
 export async function getPlayerCount({steamId}: { steamId: SupportedGame }) {
@@ -89,13 +73,12 @@ export async function getAccolade({steamId}: { steamId: SupportedGame }) {
 
 export async function getGameData({steamId, mocked = false}: { steamId: SupportedGame, mocked?: boolean }): Promise<Game | undefined> {
     const response = await fetch(`http://store.steampowered.com/api/appdetails?appids=${steamId}`)
-    
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data: SteamGameResponse = await response.json()
     const originalGameData = data[steamId]
 
     if (mocked) {
-        const mock = mockedGamesData[steamId as SupportedGame] as Game
+        const mock = mockedGamesData[steamId as SupportedGame]
 
         const mockedGameData: Game = {
             id: String(steamId),
@@ -128,3 +111,38 @@ export async function getGameData({steamId, mocked = false}: { steamId: Supporte
 
     return Promise.resolve(gameData)
 }
+
+export async function getGamesData(): Promise<{
+    totalPlayerCount: number,
+    data: Game[]
+}> {
+    let totalPlayerCount = 0; 
+    let highestRecorded = 0; 
+
+    const gamesData: Game[] = []
+
+    for (const id in SupportedGame) { 
+        const steamId: SupportedGame = Number(id)
+        const playerCount = await getPlayerCount({ steamId })
+
+        if (steamId && playerCount) {
+            totalPlayerCount += playerCount
+            const gameData = await getGameData({steamId})
+            
+            if (gameData) {
+                gamesData.push(gameData)
+            }
+
+            if (playerCount > highestRecorded) {
+                highestRecorded = playerCount
+            }
+        }
+    }
+
+    gamesData.sort((a, b) => { 
+        return b.playerCount - a.playerCount
+    })
+
+    return { totalPlayerCount, data: gamesData }
+}
+

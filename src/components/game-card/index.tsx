@@ -11,25 +11,30 @@ import type { SupportedGame } from '@/index.enums'
 export async function GameCard({
   steamId,
   className,
+  wide
 }: {
-  steamId: SupportedGame
+  steamId: SupportedGame | undefined
   className?: string
+  wide?: boolean
 }) {
+  if (!steamId) throw new Error('No steamId');
+  
   const gameData = await getGameData({ steamId })
   const imageUrl = await getBannerImageURL({ steamId })
-  
+  const width = wide ? 710 : 350
+
   return (
     <div
       key={steamId}
-      className={`relative max-h-[280px] min-w-[350px] text-white ${className}`}
+      className={`relative text-white ${className}`}
     >
       <div
-        className={`absolute min-h-[280px] min-w-[350px] rounded-xl bg-cover bg-center brightness-50 hover:brightness-100`}
+        className={`absolute h-[210px] min-w-full md:min-w-[${width}px] rounded-xl bg-cover bg-center`}
         style={{
           backgroundImage: `url(${imageUrl})`,
         }}
       ></div>
-      <Card className={`relative mb-4 max-w-[350px]`}>
+      <Card className={`relative w-[${width}px] h-[210px]`}>
         <CardHeader>
           <CardTitle className="text-2xl">{gameData?.name}</CardTitle>
           <CardDescription>{gameData?.id}</CardDescription>

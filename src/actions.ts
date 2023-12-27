@@ -4,15 +4,9 @@ import { env } from '@/env'
 import mockedGamesData from './mocks/game-list.json'
 import { DNF_DUEL, GBVSR, GG_PLUS_R, GG_STRIVE, GG_XRD_REV2, RIVALS_2, SF6, SFV, SOULCALIBUR_VI, SupportedGame, TEKKEN_7, TEKKEN_8, UNI_2 } from '@/index.enums'
 
-export async function getBannerPlayerCountTitle() { 
-    console.log(typeof window === 'undefined')
-    // TODO: pick this based on highest value in document db
-    return Promise.resolve(await getPlayerCountTitle({steamId: SF6}))
-}
-
 export async function getHomepageGames(): Promise<SupportedGame[]> {
     const { GBVSR, SF6, TEKKEN_7 } = SupportedGame
-    const games: SupportedGame[] = [GBVSR, SF6, TEKKEN_7]
+    const games: SupportedGame[] = [SF6, GBVSR, TEKKEN_7]
 
     return Promise.resolve(games)
 }
@@ -21,9 +15,32 @@ export async function getBannerImageURL({steamId}: { steamId: SupportedGame }) {
     return Promise.resolve(`https://cdn.akamai.steamstatic.com/steam/apps/${steamId}/header.jpg`)
 }
 
-export async function getPlayerCount({steamId}: { steamId: SupportedGame }) {
-    "use server";
+export async function getBannerData(): Promise<{totalPlayerCount: number, mostPopularId: SupportedGame}> {
+    let totalPlayerCount = 0; 
+    let highestRecorded = 0; 
+    let mostPopularId = SF6;
 
+    for (const id in SupportedGame) { 
+        const steamId: SupportedGame = Number(id)
+        const playerCount = await getPlayerCount({ steamId })
+
+        if (steamId && playerCount) {
+            console.log(steamId, playerCount)
+            totalPlayerCount += playerCount
+            
+            if (playerCount > highestRecorded) {
+                mostPopularId = steamId
+                highestRecorded = playerCount
+            }
+        }
+    }
+
+    // DO NOT LEAVE THIS AS A MANUAL CALCULATION ON NAVIGATION
+    // THIS SHOULD BE CALCULATED FROM THE VALUES IN THE DB.
+    return Promise.resolve({totalPlayerCount, mostPopularId})
+}
+
+export async function getPlayerCount({steamId}: { steamId: SupportedGame }) {
     const response = await fetch(`http://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key=${env.STEAM_API_KEY}&appid=${steamId}`)
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data: PlayerCountResponse = await response.json()
@@ -42,8 +59,8 @@ export async function getPlayerCountTitle({steamId}: { steamId: SupportedGame })
         [GBVSR]: 'skyfarers',
         [DNF_DUEL]: 'dungeon fighters',
         [UNI_2]: 'under night players',
-        [SF6]: 'out on the streets',
-        [SFV]: 'on the streets of V',
+        [SF6]: 'street fighters',
+        [SFV]: 'street fighters',
         [TEKKEN_7]: 'iron fist entrants',
         [TEKKEN_8]: 'iron fist entrants',
         [SOULCALIBUR_VI]: 'soul warriors',

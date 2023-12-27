@@ -17,23 +17,21 @@ import {
         <TableCaption>updates hourly</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className=""></TableHead>
+            <TableHead></TableHead>
             <TableHead>Name</TableHead>
-            <TableHead>Current Players</TableHead>
+            <TableHead className="text-right">Current Players</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
         { data.map((gameData) => {
               return (
                 <TableRow key={gameData.id + '-table-row'}>
-                <TableCell className="font-medium">{data.indexOf(gameData) + 1}</TableCell>
+                <TableCell className="font-medium max-w-6">{data.indexOf(gameData) + 1}</TableCell>
                 <TableCell>{gameData?.name}</TableCell>
-                <TableCell>{gameData?.playerCount.toLocaleString(undefined)}</TableCell>
+                <TableCell  className="text-right">{gameData?.playerCount.toLocaleString(undefined)}</TableCell>
                 </TableRow>
             )
-        })
-        
-        }
+        })}
         </TableBody>
       </Table>
     )

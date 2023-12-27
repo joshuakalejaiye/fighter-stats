@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { getBannerImageURL, getGameData } from '@/data/steam'
+import { getBannerImageURL, getGameData } from '@/actions'
 import type { SupportedGame } from '@/index.enums'
 
 export async function GameCard({
@@ -17,7 +17,6 @@ export async function GameCard({
 }) {
   const gameData = await getGameData({ steamId })
   const imageUrl = await getBannerImageURL({ steamId })
-  console.log(gameData)
   
   return (
     <div

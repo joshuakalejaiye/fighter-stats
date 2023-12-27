@@ -1,6 +1,14 @@
+"use server"
+
 import { env } from '@/env'
-import mockedGamesData from '../mocks/game-list.json'
+import mockedGamesData from './mocks/game-list.json'
 import { DNF_DUEL, GBVSR, GG_PLUS_R, GG_STRIVE, GG_XRD_REV2, RIVALS_2, SF6, SFV, SOULCALIBUR_VI, SupportedGame, TEKKEN_7, TEKKEN_8, UNI_2 } from '@/index.enums'
+
+export async function getBannerPlayerCountTitle() { 
+    console.log(typeof window === 'undefined')
+    // TODO: pick this based on highest value in document db
+    return Promise.resolve(await getPlayerCountTitle({steamId: SF6}))
+}
 
 export async function getHomepageGames(): Promise<SupportedGame[]> {
     const { GBVSR, SF6, TEKKEN_7 } = SupportedGame
@@ -14,6 +22,8 @@ export async function getBannerImageURL({steamId}: { steamId: SupportedGame }) {
 }
 
 export async function getPlayerCount({steamId}: { steamId: SupportedGame }) {
+    "use server";
+
     const response = await fetch(`http://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key=${env.STEAM_API_KEY}&appid=${steamId}`)
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data: PlayerCountResponse = await response.json()

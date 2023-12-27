@@ -11,17 +11,15 @@ import type { SupportedGame } from '@/index.enums'
 export async function GameCard({
   steamId,
   className,
-  wide
 }: {
   steamId: SupportedGame | undefined
   className?: string
-  wide?: boolean
 }) {
   if (!steamId) throw new Error('No steamId');
   
   const gameData = await getGameData({ steamId })
   const imageUrl = await getBannerImageURL({ steamId })
-  const width = wide ? 710 : 350
+  const width = 350
 
   return (
     <div

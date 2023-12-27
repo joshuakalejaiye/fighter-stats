@@ -14,7 +14,7 @@ import {
 
     return (
       <Table className={`${className}`}>
-        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableCaption>updates hourly</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className=""></TableHead>
@@ -28,7 +28,7 @@ import {
                 <TableRow key={gameData.id + '-table-row'}>
                 <TableCell className="font-medium">{data.indexOf(gameData) + 1}</TableCell>
                 <TableCell>{gameData?.name}</TableCell>
-                <TableCell>{gameData?.playerCount}</TableCell>
+                <TableCell>{gameData?.playerCount.toLocaleString(undefined)}</TableCell>
                 </TableRow>
             )
         })

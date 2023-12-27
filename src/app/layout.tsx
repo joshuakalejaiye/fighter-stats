@@ -9,7 +9,7 @@ const inter = Inter({
 
 export const metadata = {
   title: 'Fighter Stats',
-  description: 'Player numbers and data on your favourite fighting games.',
+  description: 'Player numbers and data on your favourite fighting games!',
   icons: [{ rel: 'icon', url: '/favicon.ico' }],
 }
 

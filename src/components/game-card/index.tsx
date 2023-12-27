@@ -6,17 +6,19 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { getBannerImageURL, getGameData } from '@/data/steam'
+import type { SupportedGame } from '@/index.enums'
 
 export async function GameCard({
   steamId,
   className,
 }: {
-  steamId: string
+  steamId: SupportedGame
   className?: string
 }) {
-  const gameData = await getGameData({steamId})
+  const gameData = await getGameData({ steamId })
   const imageUrl = await getBannerImageURL({ steamId })
-
+  console.log(gameData)
+  
   return (
     <div
       key={steamId}

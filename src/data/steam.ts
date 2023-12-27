@@ -1,16 +1,19 @@
 import { env } from '@/env'
 import mockedGamesData from '../mocks/game-list.json'
+import { DNF_DUEL, GBVSR, GG_PLUS_R, GG_STRIVE, GG_XRD_REV2, RIVALS_2, SF6, SFV, SOULCALIBUR_VI, SupportedGame, TEKKEN_7, TEKKEN_8, UNI_2 } from '@/index.enums'
 
 export async function getHomepageGames(): Promise<SupportedGame[]> {
-    // needs to be an object that not only says what games to render but gives data about them
-    return Promise.resolve(['2157560', '1364780', '1778820'])
+    const { GBVSR, SF6, TEKKEN_7 } = SupportedGame
+    const games: SupportedGame[] = [GBVSR, SF6, TEKKEN_7]
+
+    return Promise.resolve(games)
 }
 
-export async function getBannerImageURL({steamId}: { steamId: string }) {
+export async function getBannerImageURL({steamId}: { steamId: SupportedGame }) {
     return Promise.resolve(`https://cdn.akamai.steamstatic.com/steam/apps/${steamId}/header.jpg`)
 }
 
-export async function getPlayerCount({steamId}: { steamId: string }) {
+export async function getPlayerCount({steamId}: { steamId: SupportedGame }) {
     const response = await fetch(`http://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key=${env.STEAM_API_KEY}&appid=${steamId}`)
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data: PlayerCountResponse = await response.json()
@@ -21,26 +24,43 @@ export async function getPlayerCount({steamId}: { steamId: string }) {
     return Promise.resolve(playerCount)
 }
 
-export async function getPlayerCountTitle({steamId}: { steamId: string }) {
-    const playerCountTitle: Record<SupportedGame, string> = {
-        '1384160': 'guilty gears',
-        '348550': 'guilty gears',
-        '520440': 'guilty gears',
-        '2157560': 'skyfarers',
-        '1216060': 'dungeon fighters',
-        '2076010': 'under night players',
-        '1364780': 'out on the streets',
-        '310950': 'on the streets of V',
-        '389730': 'iron fist entrants',
-        '1778820': 'iron fist entrants',
-        '544750': 'soul warriors',
-        '2217000': 'rivals brawling'
+export async function getPlayerCountTitle({steamId}: { steamId: SupportedGame }) {
+    const playerCountTitle: { [K in SupportedGame]: string } = {
+        [GG_STRIVE]: 'guilty gears',
+        [GG_PLUS_R]: 'guilty gears',
+        [GG_XRD_REV2]: 'guilty gears',
+        [GBVSR]: 'skyfarers',
+        [DNF_DUEL]: 'dungeon fighters',
+        [UNI_2]: 'under night players',
+        [SF6]: 'out on the streets',
+        [SFV]: 'on the streets of V',
+        [TEKKEN_7]: 'iron fist entrants',
+        [TEKKEN_8]: 'iron fist entrants',
+        [SOULCALIBUR_VI]: 'soul warriors',
+        [RIVALS_2]: 'rivals brawling'
     };
 
-    return Promise.resolve(playerCountTitle[steamId as SupportedGame])
+    return Promise.resolve(playerCountTitle[steamId])
 }
 
-export async function getGameData({steamId, mocked = false}: { steamId: string, mocked?: boolean }): Promise<Game | undefined> {
+async function getAccolades() {
+    
+    //TODO: Generate these programmatically
+    const accolades: { [K in SupportedGame]?: string } = {
+        [GBVSR]: 'fastest growing',
+        [SF6]: 'most popular',
+        [GG_PLUS_R]: 'most dedicated players',
+    };
+
+    return Promise.resolve(accolades)
+}
+
+export async function getAccolade({steamId}: { steamId: SupportedGame }) {
+    const accolades = await getAccolades()
+    return Promise.resolve(accolades[steamId])
+}
+
+export async function getGameData({steamId, mocked = false}: { steamId: SupportedGame, mocked?: boolean }): Promise<Game | undefined> {
     const response = await fetch(`http://store.steampowered.com/api/appdetails?appids=${steamId}`)
     
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -50,14 +70,15 @@ export async function getGameData({steamId, mocked = false}: { steamId: string, 
     if (mocked) {
         const mock = mockedGamesData[steamId as SupportedGame] as Game
 
-        const mockedGameData =  {
-            id: steamId,
+        const mockedGameData: Game = {
+            id: String(steamId),
+            accolade: 'goodest mock data',
             name:  mock.name,
             image: await getBannerImageURL({steamId}),
             playerCount: Number('000000'),
             playerCountTitle: mock.playerCountTitle, //delegate
             releaseDate: mock.releaseDate,
-            link: `https://store.steampowered.com/app/${steamId}/`
+            link: `https://store.steampowered.com/app/${steamId}/`,
         }
     
         return Promise.resolve(mockedGameData)
@@ -67,8 +88,9 @@ export async function getGameData({steamId, mocked = false}: { steamId: string, 
         return Promise.resolve(undefined)
     }
 
-    const gameData =  {
-        id: steamId,
+    const gameData: Game =  {
+        id: String(steamId),
+        accolade: await getAccolade({steamId}),
         name:  originalGameData?.data.name,
         image: await getBannerImageURL({steamId}),
         playerCount: await getPlayerCount({steamId}),

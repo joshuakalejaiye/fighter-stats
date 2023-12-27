@@ -1,5 +1,6 @@
 import { GameCard } from '@/components/game-card'
 import { getHomepageGames } from '@/data/steam'
+import { SupportedGame } from '@/index.enums'
 
 export default async function HomePage() {
   const homepageGameIds = await getHomepageGames()
@@ -14,10 +15,10 @@ export default async function HomePage() {
           <h2 className="pr-2 text-right text-xl font-bold">Guilty Gears</h2>
         </div>
         <div className="flex flex-col md:grid md:gap-x-6">
-          <GameCard steamId={'1384160'} className="md:col-span-2" />
+          <GameCard steamId={SupportedGame.GG_STRIVE} className="md:col-span-2" />
           {homepageGameIds.map(
             (steamId) =>
-              steamId !== '1384160' && (
+              steamId !== SupportedGame.GG_STRIVE && (
                 <GameCard steamId={steamId} className="" />
               )
           )}

@@ -1,10 +1,12 @@
 type SupportedGame =  '1384160'| '348550'| '520440'| '2157560'| '1216060'| '2076010'| '1364780'| '310950'| '389730'| '1778820'| '544750'| '2217000'
 
 interface Game {
+  id: string
   name: string
-  steamId: string
+  playerCount: number
   playerCountTitle: string
-  release_date: { coming_soon: boolean; date: string }
+  releaseDate: { coming_soon: boolean; date: string }
+  link?: string
 }
 
 type SteamGameResponse = Record<string, { success: boolean, data: GameData}>

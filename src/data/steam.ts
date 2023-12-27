@@ -40,7 +40,7 @@ export async function getPlayerCountTitle({steamId}: { steamId: string }) {
     return Promise.resolve(playerCountTitle[steamId as SupportedGame])
 }
 
-export async function getGameData({steamId, mocked = false}: { steamId: string, mocked?: boolean }) {
+export async function getGameData({steamId, mocked = false}: { steamId: string, mocked?: boolean }): Promise<Game | undefined> {
     const response = await fetch(`http://store.steampowered.com/api/appdetails?appids=${steamId}`)
     
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -54,9 +54,9 @@ export async function getGameData({steamId, mocked = false}: { steamId: string, 
             id: steamId,
             name:  mock.name,
             image: await getBannerImageURL({steamId}),
-            playerCount: '000000',
+            playerCount: Number('000000'),
             playerCountTitle: mock.playerCountTitle, //delegate
-            releaseDate: mock.release_date,
+            releaseDate: mock.releaseDate,
             link: `https://store.steampowered.com/app/${steamId}/`
         }
     

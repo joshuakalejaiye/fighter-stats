@@ -16,8 +16,6 @@ export async function GameCard({
 }) {
   const gameData = await getGameData({steamId})
   const imageUrl = await getBannerImageURL({ steamId })
-  console.log(gameData)
-
 
   return (
     <div

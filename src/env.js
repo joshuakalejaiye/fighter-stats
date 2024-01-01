@@ -8,13 +8,12 @@ export const env = createEnv({
    */
   server: {
     STEAM_API_KEY: z.string(),
+    DIRECT_URL: z
+    .string()
+    .url(),
     DATABASE_URL: z
       .string()
-      .url()
-      .refine(
-        (str) => !str.includes('YOUR_MYSQL_URL_HERE'),
-        'You forgot to change the default URL'
-      ),
+      .url(),
     NODE_ENV: z
       .enum(['development', 'test', 'production'])
       .default('development'),
@@ -35,6 +34,7 @@ export const env = createEnv({
    */
   runtimeEnv: {
     STEAM_API_KEY: process.env.STEAM_API_KEY,
+    DIRECT_URL: process.env.DIRECT_URL,
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,

@@ -1,5 +1,5 @@
 import { GameCard } from '@/components/game-card'
-import { getHomepageGames } from '@/actions'
+import { getHomepageGames } from '@/server/steam-actions'
 import { GamesTable } from '@/components/games-table'
 import Banner from '@/components/banner'
 
@@ -17,8 +17,8 @@ export default async function HomePage() {
                 <GameCard key={steamId} steamId={steamId}  />
           )}
         </div>
-        <div className='mt-16 max-w-[400px] md:max-w-[750px] w-screen px-6 md:px-0'>
-        <GamesTable />
+        <div className='pt-16 max-w-[400px] md:max-w-[750px] w-screen px-6 md:px-0'>
+          <GamesTable />
         </div>
        <div>
        </div>

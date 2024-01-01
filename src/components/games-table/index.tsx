@@ -1,4 +1,6 @@
-import { getGamesData } from "@/actions"
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
 import {
     Table,
     TableBody,
@@ -10,7 +12,27 @@ import {
   } from "@/components/ui/table"
    
   export async function GamesTable({className}: {className?: string}) {
-    const { data } = await getGamesData()
+
+    const HydratedTableRow = async () => {
+      "use server"
+    
+      const gamesSortedByPlayers = await prisma.games.findMany({
+          orderBy: {
+              players: 'desc' // Order by 'players' in descending order
+          }    
+      });
+
+      return gamesSortedByPlayers.map((game) => {
+        return (
+          <TableRow key={game.steam_id + '-table-row'}>
+          <TableCell className="font-medium max-w-6">{gamesSortedByPlayers.indexOf(game) + 1}</TableCell>
+          <TableCell>{game.name}</TableCell>
+          <TableCell  className="text-right">{game.players.toLocaleString(undefined)}</TableCell>
+          </TableRow>
+        )
+      })
+    }
+
 
     return (
       <Table className={`${className}`}>
@@ -23,15 +45,7 @@ import {
           </TableRow>
         </TableHeader>
         <TableBody>
-        { data.map((gameData) => {
-              return (
-                <TableRow key={gameData.id + '-table-row'}>
-                <TableCell className="font-medium max-w-6">{data.indexOf(gameData) + 1}</TableCell>
-                <TableCell>{gameData?.name}</TableCell>
-                <TableCell  className="text-right">{gameData?.playerCount.toLocaleString(undefined)}</TableCell>
-                </TableRow>
-            )
-        })}
+        <HydratedTableRow />
         </TableBody>
       </Table>
     )

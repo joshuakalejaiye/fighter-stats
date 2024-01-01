@@ -3,7 +3,6 @@
 import { env } from '@/env'
 import mockedGamesData from './mocks/game-list.json'
 import { DNF_DUEL, GBVSR, GG_PLUS_R, GG_STRIVE, GG_XRD_REV2, RIVALS_2, SF6, SFV, SOULCALIBUR_VI, SupportedGame, TEKKEN_7, TEKKEN_8, UNI_2 } from '@/index.enums'
-import { abort } from 'process'
 
 export async function getHomepageGames(): Promise<SupportedGame[]> {
     const { GBVSR, SF6, TEKKEN_7 } = SupportedGame
@@ -85,6 +84,7 @@ export async function getGameData({steamId, mocked = false}: { steamId: Supporte
             accolade: 'goodest mock data',
             name:  mock.name,
             image: await getBannerImageURL({steamId}),
+            developers: 'mocked_devs',
             playerCount: Number('000000'),
             playerCountTitle: mock.playerCountTitle, //delegate
             releaseDate: mock.releaseDate,
@@ -104,6 +104,7 @@ export async function getGameData({steamId, mocked = false}: { steamId: Supporte
         name:  originalGameData?.data.name,
         image: await getBannerImageURL({steamId}),
         playerCount: await getPlayerCount({steamId}),
+        developers: originalGameData?.data.developers.join(', '),
         playerCountTitle: await getPlayerCountTitle({steamId}), //delegate
         releaseDate: originalGameData?.data.release_date,
         link: `https://store.steampowered.com/app/${steamId}/`

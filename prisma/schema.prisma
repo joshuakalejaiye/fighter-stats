@@ -1,20 +1,26 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model accolades {
+  id       BigInt  @id
+  accolade String  @unique @db.VarChar(50)
+  games    games[]
+}
 
-    @@index([name])
+model games {
+  steam_id     BigInt     @id
+  players      BigInt
+  last_updated BigInt
+  image_link   String     @db.VarChar(100)
+  accolade     BigInt?
+  accolades    accolades? @relation(fields: [accolade], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([players], map: "idx_players")
 }

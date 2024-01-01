@@ -4,6 +4,7 @@ interface Game {
   accolade?: string
   image: string,
   name: string
+  developers: string,
   playerCount: number
   playerCountTitle: string
   releaseDate: { coming_soon: boolean; date: string }

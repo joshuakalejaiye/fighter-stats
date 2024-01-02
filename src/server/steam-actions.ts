@@ -3,11 +3,11 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 import mockedGamesData from '../mocks/game-list.json'
-import { DNF_DUEL, GBVSR, GG_PLUS_R, GG_STRIVE, GG_XRD_REV2, RIVALS_2, SF6, SFV, SOULCALIBUR_VI, SupportedGame, TEKKEN_7, TEKKEN_8, UNI_2 } from '@/index.enums'
+import { SupportedGame } from '@/index.enums'
+import type { Game, SteamGameResponse } from '..'
+const { DNF_DUEL, GBVSR, GG_PLUS_R, GG_STRIVE, GG_XRD_REV2, RIVALS_2, SF6, SFV, SOULCALIBUR_VI, TEKKEN_7, TEKKEN_8, UNI_2 } = SupportedGame
 
 export async function getHomepageGames(): Promise<SupportedGame[]> {
-    const { UNI_2 } = SupportedGame
-
     const topTwoGames = await prisma.games.findMany({
         orderBy: {
             players: 'desc' // Order by 'players' in descending order
@@ -19,7 +19,7 @@ export async function getHomepageGames(): Promise<SupportedGame[]> {
     });
 
     
-    const games: SupportedGame[] = [...(topTwoGames.map((game) => Number(game.steam_id))), UNI_2]
+    const games: SupportedGame[] = [...(topTwoGames.map((game) => Number(game.steam_id))), TEKKEN_8]
 
     return Promise.resolve(games)
 }
@@ -141,7 +141,7 @@ export async function getTotalPlayerCount(): Promise<{ totalPlayerCount: number 
 export async function getMostPlayedGameId(): Promise<{ steamId: SupportedGame }> {
     const gamesSortedByPlayers = await prisma.games.findMany({
         orderBy: {
-            players: 'desc' // Order by 'players' in descending order
+            players: 'desc'
         }    
     });
 

@@ -11,7 +11,7 @@ interface Game {
   link?: string
 }
 
-type SteamGameResponse = Record<string, { success: boolean, data: GameData}>
+export type SteamGameResponse = Record<string, { success: boolean, data: GameData}>
 
 interface GameData {
   type: string;

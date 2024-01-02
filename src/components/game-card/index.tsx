@@ -19,8 +19,7 @@ export async function GameCard({
   
   const gameData = await getGameData({ steamId })
   if (!gameData) return <></>
-  
-  console.log(gameData)
+
   const imageUrl = await getBannerImageURL({ steamId })
   const width = 350
 

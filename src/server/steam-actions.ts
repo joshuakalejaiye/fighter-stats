@@ -10,7 +10,7 @@ const { DNF_DUEL, GBVSR, GG_PLUS_R, GG_STRIVE, GG_XRD_REV2, RIVALS_2, SF6, SFV, 
 export async function getHomepageGames(): Promise<SupportedGame[]> {
     const topTwoGames = await prisma.games.findMany({
         orderBy: {
-            players: 'desc' // Order by 'players' in descending order
+            players: 'desc' 
         },
         select: {
             steam_id: true

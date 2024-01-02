@@ -16,6 +16,7 @@ const getSteamPlayerCount = async ({ steamId }: { steamId: number | string}): Pr
 export default async (req: Request) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { next_run } = await req.json()
+    const last_updated = Date.now()
 
     for (const steamId in SupportedGame) {
         await prisma.games.update({
@@ -24,11 +25,12 @@ export default async (req: Request) => {
             }, 
             data: {
                players: await getSteamPlayerCount({ steamId }), 
+               last_updated: last_updated
             }
         })
     }
 
-    console.log("Received event! Next invocation at:", next_run)
+    console.log("Received event! Next invocation at:", next_run, last_updated)
 }
 
 export const config: Config = {

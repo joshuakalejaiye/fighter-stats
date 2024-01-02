@@ -8,6 +8,8 @@ import {
 import { getBannerImageURL, getGameData } from '@/server/steam-actions'
 import type { SupportedGame } from '@/index.enums'
 
+export const dynamic = 'force-dynamic'
+
 export async function GameCard({
   steamId,
   className,

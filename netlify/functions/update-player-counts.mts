@@ -1,9 +1,8 @@
-import type{ Config } from "@netlify/functions"
-import { PrismaClient } from '@prisma/client'
-import { env } from '../../env'
+import type { Config } from "@netlify/functions"
+import { env } from 'src/env'
 import { SupportedGame } from "@/index.enums"
 import type { PlayerCountResponse } from "@/index"
-const prisma = new PrismaClient()
+import { prisma } from "@/server/db"
 
 const getSteamPlayerCount = async ({ steamId }: { steamId: number | string}): Promise<number> => {
     const steamPlayerCountEndpoint = `http://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key=${env.STEAM_API_KEY}&appid=${steamId}`
@@ -18,18 +17,26 @@ export default async (req: Request) => {
     const { next_run } = await req.json()
     const last_updated = Date.now()
 
-    for (const steamId in SupportedGame) {
-        await prisma.games.update({
-            where: {
-                steam_id: Number(steamId),
-            }, 
-            data: {
-               players: await getSteamPlayerCount({ steamId }), 
-               last_updated: last_updated
-            }
-        })
-    }
+    for (const game in SupportedGame) {
+        const steamId = Number(game)
 
+        if (isNaN(steamId)) {
+            continue
+        }
+
+        if (steamId) {
+            await prisma.games.update({
+                where: {
+                    steam_id: Number(steamId),
+                }, 
+                data: {
+                    players: await getSteamPlayerCount({ steamId }), 
+                    last_updated: last_updated
+                }
+            })
+        }
+    }
+    
     console.log("Received event! Next invocation at:", next_run, last_updated)
 }
 

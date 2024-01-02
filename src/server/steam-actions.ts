@@ -1,10 +1,8 @@
 "use server"
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
-
 import mockedGamesData from '../mocks/game-list.json'
 import { SupportedGame } from '@/index.enums'
 import type { Game, SteamGameResponse } from '..'
+import { prisma } from "@/server/db"
 const { DNF_DUEL, GBVSR, GG_PLUS_R, GG_STRIVE, GG_XRD_REV2, RIVALS_2, SF6, SFV, SOULCALIBUR_VI, TEKKEN_7, TEKKEN_8, UNI_2 } = SupportedGame
 
 export async function getHomepageGames(): Promise<SupportedGame[]> {

@@ -1,15 +1,13 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
-
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { prisma } from "@/server/db";
    
   export async function GamesTable({className}: {className?: string}) {
 
@@ -27,7 +25,7 @@ import {
           <TableRow key={game.steam_id + '-table-row'}>
           <TableCell className="font-medium max-w-6">{gamesSortedByPlayers.indexOf(game) + 1}</TableCell>
           <TableCell>{game.name}</TableCell>
-          <TableCell  className="text-right">{game.players.toLocaleString(undefined)}</TableCell>
+          <TableCell  className="text-right">{game.players > 0 ? game.players.toLocaleString(undefined) : 'Unreleased'}</TableCell>
           </TableRow>
         )
       })

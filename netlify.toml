@@ -1,0 +1,2 @@
+[functions.update-player-counts]
+schedule = "@hourly"

@@ -1,6 +1,6 @@
 import { getMostPlayedGameId, getPlayerCountTitle, getTotalPlayerCount } from '@/server/steam-actions'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export default async function Banner() {
   const { playerCountTitle } = await getPlayerCountTitle({

@@ -42,6 +42,7 @@ export async function GamesTable({ className }: { className?: string }) {
     <div className="w-screen px-6 pt-12 md:max-w-[800px] md:px-0">
        <Card className={``}>
   <CardHeader className={''}>
+    <CardTitle className='text-3xl text-center'>Tracked Games</CardTitle>
   </CardHeader>
   <CardContent className="">
   <Table className={`${className}`}>

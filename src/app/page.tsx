@@ -4,16 +4,11 @@ import { GamesTable } from '@/components/games-table'
 import {
   getHomepageGames,
   getMostPlayedGameId,
-  getPlayerCountTitle,
-  getTotalPlayerCount,
 } from '@/server/steam-actions'
 
 export default async function HomePage() {
-  const { totalPlayerCount } = await getTotalPlayerCount()
   const { steamId } = await getMostPlayedGameId()
-  const { playerCountTitle } = await getPlayerCountTitle({
-    steamId,
-  })
+
   const homepageGames = await getHomepageGames()
 
   const [firstGameId, ...remainingGameIds] = homepageGames
@@ -21,7 +16,7 @@ export default async function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-white dark:bg-black">
       <div className="container mt-8 flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <Banner steamId={steamId} />
+        <Banner />
         <div className="flex grid-cols-2 grid-rows-2 flex-col gap-x-4 gap-y-6 md:grid">
           <GameCard
             key={firstGameId}

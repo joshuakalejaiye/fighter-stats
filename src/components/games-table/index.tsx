@@ -9,8 +9,6 @@ import {
 } from "@/components/ui/table"
 import { prisma } from "@/server/db";
 
-export const revalidate = 0
-
 export async function GamesTable({className}: {className?: string}) {
 
     const HydratedTableRow = async () => {

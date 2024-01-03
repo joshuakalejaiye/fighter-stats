@@ -28,7 +28,7 @@ export async function GamesTable({ className }: { className?: string }) {
             {gamesSortedByPlayers.indexOf(game) + 1}
           </TableCell>
           <TableCell className='text-white'>{game.name}</TableCell>
-          <TableCell className="text-right text-lime-400">
+          <TableCell className="text-lime-400">
             {game.players > 0
               ? game.players.toLocaleString(undefined)
               : 'Unreleased'}

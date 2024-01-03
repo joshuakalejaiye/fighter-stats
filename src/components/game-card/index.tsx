@@ -8,9 +8,7 @@ import {
 import { getBannerImageURL, getGameData } from '@/server/steam-actions'
 import type { SupportedGame } from '@/index.enums'
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0
-
+export const dynamic = 'force-dynamic'
 export async function GameCard({
   steamId,
   className,
@@ -25,10 +23,7 @@ export async function GameCard({
   if (!data) return <></>
 
   return (
-    <div
-      key={steamId}
-      className={`relative text-white ${className}`}
-    >
+    <div key={steamId} className={`relative text-white ${className}`}>
       <div
         className={`absolute h-[210px] min-w-full md:min-w-[${width}px] rounded-xl bg-cover bg-center`}
         style={{
@@ -41,14 +36,16 @@ export async function GameCard({
           <CardDescription>{data?.accolade}</CardDescription>
         </CardHeader>
         <CardContent className="min-h-16">
-          {!!data?.playerCount && <div className="flex flex-col p-0">
-            <p className="text-3xl font-extrabold tracking-tight text-green-500 sm:text-[2em]">
-              {data?.playerCount?.toLocaleString(undefined)}
-            </p>
-            <p className="pr-1 text-right text-lg font-bold sm:text-xl">
-              {data?.playerCountTitle}
-            </p>
-          </div>}
+          {!!data?.playerCount && (
+            <div className="flex flex-col p-0">
+              <p className="text-3xl font-extrabold tracking-tight text-green-500 sm:text-[2em]">
+                {data?.playerCount?.toLocaleString(undefined)}
+              </p>
+              <p className="pr-1 text-right text-lg font-bold sm:text-xl">
+                {data?.playerCountTitle}
+              </p>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

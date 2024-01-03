@@ -8,12 +8,8 @@ export const env = createEnv({
    */
   server: {
     STEAM_API_KEY: z.string(),
-    DIRECT_URL: z
-    .string()
-    .url(),
-    DATABASE_URL: z
-      .string()
-      .url(),
+    DIRECT_URL: z.string().url(),
+    DATABASE_URL: z.string().url(),
     NODE_ENV: z
       .enum(['development', 'test', 'production'])
       .default('development'),

@@ -1,132 +1,131 @@
 {
-  "1384160":  {
-      "id": "1384160",
-      "name": "GUILTY GEAR -STRIVE-",
-      "playerCount": "33333",
-      "playerCountTitle": "guilty gears",
-      "releaseDate": {
-        "coming_soon": false,
-        "date": "01/jan./2020"
-      },
-      "link": "https://store.steampowered.com/app/1384160/"
+  "1384160": {
+    "id": "1384160",
+    "name": "GUILTY GEAR -STRIVE-",
+    "playerCount": "33333",
+    "playerCountTitle": "guilty gears",
+    "releaseDate": {
+      "coming_soon": false,
+      "date": "01/jan./2020"
+    },
+    "link": "https://store.steampowered.com/app/1384160/"
   },
-  "348550":
-    {
-      "name": "GUILTY GEAR XX ACCENT CORE PLUS R",
-      "id": "348550",
-      "playerCount": "33333",
-      "playerCountTitle": "guilty gears",
-      "releaseDate": {
-        "coming_soon": false,
-        "date": "01/jan./2020"
-      },
-      "link": "https://store.steampowered.com/app/348550/"
+  "348550": {
+    "name": "GUILTY GEAR XX ACCENT CORE PLUS R",
+    "id": "348550",
+    "playerCount": "33333",
+    "playerCountTitle": "guilty gears",
+    "releaseDate": {
+      "coming_soon": false,
+      "date": "01/jan./2020"
+    },
+    "link": "https://store.steampowered.com/app/348550/"
   },
   "520440": {
-      "name": "GUILTY GEAR Xrd REV 2",
-      "id": "520440",
-      "playerCount": "33333",
-      "playerCountTitle": "guilty gears",
-      "releaseDate": {
-        "coming_soon": false,
-        "date": "01/jan./2020"
-      },
-      "link": "https://store.steampowered.com/app/520440/"
+    "name": "GUILTY GEAR Xrd REV 2",
+    "id": "520440",
+    "playerCount": "33333",
+    "playerCountTitle": "guilty gears",
+    "releaseDate": {
+      "coming_soon": false,
+      "date": "01/jan./2020"
+    },
+    "link": "https://store.steampowered.com/app/520440/"
   },
-  "2157560":  {
-      "name": "Granblue Fantasy Versus: Rising",
-      "id": "2157560",
-      "playerCount": "33333",
-      "playerCountTitle": "skyfarers",
-      "releaseDate": {
-        "coming_soon": false,
-        "date": "15/dec./2024"
-      },
-      "link": "https://store.steampowered.com/app/2157560/"
+  "2157560": {
+    "name": "Granblue Fantasy Versus: Rising",
+    "id": "2157560",
+    "playerCount": "33333",
+    "playerCountTitle": "skyfarers",
+    "releaseDate": {
+      "coming_soon": false,
+      "date": "15/dec./2024"
     },
+    "link": "https://store.steampowered.com/app/2157560/"
+  },
   "1216060": {
-      "name": "DNF Duel",
-      "id": "1216060",
-      "playerCountTitle": "dungeon fighters",
-      "releaseDate": {
-        "coming_soon": false,
-        "date": "2022"
-      },
-      "link": "https://store.steampowered.com/app/1216060/"
+    "name": "DNF Duel",
+    "id": "1216060",
+    "playerCountTitle": "dungeon fighters",
+    "releaseDate": {
+      "coming_soon": false,
+      "date": "2022"
     },
+    "link": "https://store.steampowered.com/app/1216060/"
+  },
   "2076010": {
-      "name": "UNDER NIGHT IN-BIRTH II Sys:Celes",
-      "id": "2076010",
-      "playerCountTitle": "under night players",
-      "releaseDate": {
-        "coming_soon": true,
-        "date": "2024"
-      },
-      "link": "https://store.steampowered.com/app/2076010/"
+    "name": "UNDER NIGHT IN-BIRTH II Sys:Celes",
+    "id": "2076010",
+    "playerCountTitle": "under night players",
+    "releaseDate": {
+      "coming_soon": true,
+      "date": "2024"
     },
+    "link": "https://store.steampowered.com/app/2076010/"
+  },
   "1364780": {
-      "name": "Street Fighter™ 6",
-      "id": "1364780",
-      "playerCount": "33333",
-      "playerCountTitle": "out on the streets",
-      "releaseDate": {
-        "coming_soon": false,
-        "date": "01/jan./2020"
-      },
-      "link": "https://store.steampowered.com/app/1364780/"
+    "name": "Street Fighter™ 6",
+    "id": "1364780",
+    "playerCount": "33333",
+    "playerCountTitle": "out on the streets",
+    "releaseDate": {
+      "coming_soon": false,
+      "date": "01/jan./2020"
     },
-  "310950":  {
-      "name": "Street Fighter V",
-      "id": "310950",
-      "playerCount": "33333",
-      "playerCountTitle": "on the streets of V",
-      "releaseDate": {
-        "coming_soon": false,
-        "date": "01/jan./2020"
-      }
-    },
-  "389730": {
-      "name": "TEKKEN 7",
-      "id": "389730",
-      "playerCount": "33333",
-      "playerCountTitle": "iron fist entrants",
-      "releaseDate": {
-        "coming_soon": false,
-        "date": "01/jan./2020"
-      },
-      "link": "https://store.steampowered.com/app/389730/"
-    },
-  "1778820":  {
-      "name": "TEKKEN 8",
-      "id": "1778820",
-      "playerCount": "33333",
-      "playerCountTitle": "iron fist entrants",
-      "releaseDate": {
-        "coming_soon": true,
-        "date": "25/jan./2024"
-      },
-      "link": "https://store.steampowered.com/app/1778820/"
-    },
-  "544750":  {
-      "name": "SOULCALIBUR VI",
-      "id": "544750",
-      "playerCount": "33333",
-      "playerCountTitle": "soul warriors",
-      "releaseDate": {
-        "coming_soon": false,
-        "date": "01/jan./2020"
-      },
-      "link": "https://store.steampowered.com/app/544750/"
-    },
-  "2217000": {
-      "name": "Rivals 2",
-      "id": "2217000",
-      "playerCount": "33333",
-      "playerCountTitle": "rivals brawling",
-      "releaseDate": {
-        "coming_soon": true,
-        "date": "2024"
-      },
-      "link": "https://store.steampowered.com/app/2217000/"
+    "link": "https://store.steampowered.com/app/1364780/"
+  },
+  "310950": {
+    "name": "Street Fighter V",
+    "id": "310950",
+    "playerCount": "33333",
+    "playerCountTitle": "on the streets of V",
+    "releaseDate": {
+      "coming_soon": false,
+      "date": "01/jan./2020"
     }
+  },
+  "389730": {
+    "name": "TEKKEN 7",
+    "id": "389730",
+    "playerCount": "33333",
+    "playerCountTitle": "iron fist entrants",
+    "releaseDate": {
+      "coming_soon": false,
+      "date": "01/jan./2020"
+    },
+    "link": "https://store.steampowered.com/app/389730/"
+  },
+  "1778820": {
+    "name": "TEKKEN 8",
+    "id": "1778820",
+    "playerCount": "33333",
+    "playerCountTitle": "iron fist entrants",
+    "releaseDate": {
+      "coming_soon": true,
+      "date": "25/jan./2024"
+    },
+    "link": "https://store.steampowered.com/app/1778820/"
+  },
+  "544750": {
+    "name": "SOULCALIBUR VI",
+    "id": "544750",
+    "playerCount": "33333",
+    "playerCountTitle": "soul warriors",
+    "releaseDate": {
+      "coming_soon": false,
+      "date": "01/jan./2020"
+    },
+    "link": "https://store.steampowered.com/app/544750/"
+  },
+  "2217000": {
+    "name": "Rivals 2",
+    "id": "2217000",
+    "playerCount": "33333",
+    "playerCountTitle": "rivals brawling",
+    "releaseDate": {
+      "coming_soon": true,
+      "date": "2024"
+    },
+    "link": "https://store.steampowered.com/app/2217000/"
+  }
 }

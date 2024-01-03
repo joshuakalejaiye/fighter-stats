@@ -4,7 +4,7 @@ import { getGameData } from '@/server/steam-actions'
 
 export const dynamic = 'force-dynamic'
 
-export async function GET(request: Request) {
+export async function GET() {
   const data: Game[] = []
 
   for (const game in SupportedGame) {
@@ -14,7 +14,7 @@ export async function GET(request: Request) {
       continue
     }
 
-    const { data: gameData } = await getGameData({ steamId })
+    const { data: gameData } = await getGameData({ steamId, path: '/' })
 
     if (gameData) {
       data.push(gameData)

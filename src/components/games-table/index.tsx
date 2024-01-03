@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/table'
 import { prisma } from '@/server/db'
 import { revalidatePath } from 'next/cache'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
 
 export async function GamesTable({ className }: { className?: string }) {
   const RowsWithData = async () => {
@@ -22,12 +23,12 @@ export async function GamesTable({ className }: { className?: string }) {
 
     return gamesSortedByPlayers.map((game) => {
       return (
-        <TableRow key={game.steam_id + '-table-row'}>
+        <TableRow key={game.steam_id + '-table-row'} className='text-neutral-400'>
           <TableCell className="max-w-6 font-medium">
             {gamesSortedByPlayers.indexOf(game) + 1}
           </TableCell>
-          <TableCell>{game.name}</TableCell>
-          <TableCell className="text-right">
+          <TableCell className='text-white'>{game.name}</TableCell>
+          <TableCell className="text-right text-lime-400">
             {game.players > 0
               ? game.players.toLocaleString(undefined)
               : 'Unreleased'}
@@ -38,20 +39,28 @@ export async function GamesTable({ className }: { className?: string }) {
   }
 
   return (
-    <div className="w-screen max-w-[400px] px-6 pt-16 md:max-w-[750px] md:px-0">
-      <Table className={`${className}`}>
+    <div className="w-screen px-6 pt-12 md:max-w-[800px] md:px-0">
+       <Card className={``}>
+  <CardHeader className={''}>
+  </CardHeader>
+  <CardContent className="">
+  <Table className={`${className}`}>
         <TableCaption>updates hourly</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead></TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead className="text-right">Current Players</TableHead>
+            <TableHead className='text-white'>Name</TableHead>
+            <TableHead className='text-white'>Current Players</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           <RowsWithData />
         </TableBody>
       </Table>
+  </CardContent>
+</Card>
+      
+      
     </div>
   )
 }

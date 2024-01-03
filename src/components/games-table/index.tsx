@@ -11,9 +11,7 @@ import { prisma } from '@/server/db'
 import { revalidatePath } from 'next/cache'
 
 export async function GamesTable({ className }: { className?: string }) {
-  const HydratedTableRow = async () => {
-    'use server'
-
+  const RowsWithData = async () => {
     const gamesSortedByPlayers = await prisma.games.findMany({
       orderBy: {
         players: 'desc', // Order by 'players' in descending order
@@ -40,18 +38,20 @@ export async function GamesTable({ className }: { className?: string }) {
   }
 
   return (
-    <Table className={`${className}`}>
-      <TableCaption>updates hourly</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead></TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead className="text-right">Current Players</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <HydratedTableRow />
-      </TableBody>
-    </Table>
+    <div className="w-screen max-w-[400px] px-6 pt-16 md:max-w-[750px] md:px-0">
+      <Table className={`${className}`}>
+        <TableCaption>updates hourly</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead></TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead className="text-right">Current Players</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <RowsWithData />
+        </TableBody>
+      </Table>
+    </div>
   )
 }

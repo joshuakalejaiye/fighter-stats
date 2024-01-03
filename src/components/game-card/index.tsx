@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { getBannerImageURL, getGameData } from '@/server/steam-actions'
+import { getGameData } from '@/server/steam-actions'
 import type { SupportedGame } from '@/index.enums'
 
 export const dynamic = 'force-dynamic'
@@ -13,21 +13,20 @@ export async function GameCard({
   steamId,
   className,
 }: {
-  steamId: SupportedGame
+  steamId?: SupportedGame
   className?: string
 }) {
-  const { data } = await getGameData({ steamId })
-  const imageUrl = await getBannerImageURL({ steamId })
+  if (!steamId) return <></>
+  const { data } = await getGameData({ steamId, path: '/' })
   const width = 350
 
-  if (!data) return <></>
 
   return (
     <div key={steamId} className={`relative text-white ${className}`}>
       <div
         className={`absolute h-[210px] min-w-full md:min-w-[${width}px] rounded-xl bg-cover bg-center`}
         style={{
-          backgroundImage: `url(${imageUrl})`,
+          backgroundImage: `url(${data?.image})`,
         }}
       ></div>
       <Card className={`relative w-[${width}px] h-[210px]`}>

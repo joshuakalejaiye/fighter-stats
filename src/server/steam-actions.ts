@@ -54,9 +54,11 @@ export async function getBannerImageURL({
 
 export async function getGameData({
   steamId,
+  path,
   mocked = false,
 }: {
   steamId: SupportedGame
+  path: string,
   mocked?: boolean
 }): Promise<{ data: Game | undefined }> {
   const response = await fetch(
@@ -97,7 +99,7 @@ export async function getGameData({
     },
   })
 
-  revalidatePath('/')
+  revalidatePath(path)
 
   const data: Game = {
     id: String(gameDataFromDB?.steam_id.toString()),
@@ -116,7 +118,7 @@ export async function getGameData({
   return Promise.resolve({ data })
 }
 
-export async function getHomepageGames(): Promise<SupportedGame[]> {
+export async function getHomepageGames(): Promise<{ games: SupportedGame[] }> {
   const topTwoGames = await prisma.games.findMany({
     orderBy: {
       players: 'desc',
@@ -134,7 +136,7 @@ export async function getHomepageGames(): Promise<SupportedGame[]> {
     TEKKEN_8,
   ]
 
-  return Promise.resolve(games)
+  return Promise.resolve({ games })
 }
 
 export async function getTotalPlayerCount(): Promise<{

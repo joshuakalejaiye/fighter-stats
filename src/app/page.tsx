@@ -3,6 +3,8 @@ import { GameCard } from '@/components/game-card'
 import { GamesTable } from '@/components/games-table'
 import { getHomepageGames, getMostPlayedGameId, getPlayerCountTitle, getTotalPlayerCount } from '@/server/steam-actions'
 
+export const revalidate = 0
+
 export default async function HomePage() {
   const { totalPlayerCount } = await getTotalPlayerCount()
   const { steamId } = await getMostPlayedGameId()

@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { prisma } from "@/server/db";
+import { revalidatePath } from "next/cache";
 
 export async function GamesTable({className}: {className?: string}) {
 
@@ -19,6 +20,8 @@ export async function GamesTable({className}: {className?: string}) {
               players: 'desc' // Order by 'players' in descending order
           }    
       });
+
+      revalidatePath('/')
 
       return gamesSortedByPlayers.map((game) => {
         return (

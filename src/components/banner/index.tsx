@@ -1,6 +1,6 @@
 "use client"
 
-export default function Banner({ playerCount, playerCountTitle } : { playerCount: string | number, playerCountTitle: string }) {
+export default function Banner({ playerCount, playerCountTitle} : { playerCount: string | number, playerCountTitle: string }) {
 
   return (
         <div>

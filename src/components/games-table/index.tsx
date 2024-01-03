@@ -8,8 +8,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { prisma } from "@/server/db";
-   
-  export async function GamesTable({className}: {className?: string}) {
+
+export const dynamic = 'force-dynamic'
+
+export async function GamesTable({className}: {className?: string}) {
 
     const HydratedTableRow = async () => {
       "use server"
@@ -47,4 +49,4 @@ import { prisma } from "@/server/db";
         </TableBody>
       </Table>
     )
-  }
+}

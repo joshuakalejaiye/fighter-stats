@@ -1,50 +1,17 @@
-"use server"
-import mockedGamesData from '../mocks/game-list.json'
+
 import { SupportedGame } from '@/index.enums'
-import type { Game, SteamGameResponse } from '..'
-import { prisma } from "@/server/db"
+import type { Game, SteamGameResponse } from '@/index';
+import mockedGamesData from '@/mocks/game-list.json'
+import { prisma } from './db';
+
 const { DNF_DUEL, GBVSR, GG_PLUS_R, GG_STRIVE, GG_XRD_REV2, RIVALS_2, SF6, SFV, SOULCALIBUR_VI, TEKKEN_7, TEKKEN_8, UNI_2 } = SupportedGame
-
-export async function getHomepageGames(): Promise<SupportedGame[]> {
-    const topTwoGames = await prisma.games.findMany({
-        orderBy: {
-            players: 'desc' 
-        },
-        select: {
-            steam_id: true
-        },
-        take: 2
-    });
-
-    
-    const games: SupportedGame[] = [...(topTwoGames.map((game) => Number(game.steam_id))), TEKKEN_8]
-
-    return Promise.resolve(games)
-}
-
-export async function getBannerImageURL({steamId}: { steamId: SupportedGame }) {
-    return Promise.resolve(`https://cdn.akamai.steamstatic.com/steam/apps/${steamId}/header.jpg`)
-}
-
-export async function getPlayerCount({steamId}: { steamId: SupportedGame }): Promise<{ playerCount: number }> {
-    const game = await prisma.games.findUnique({
-        where: {
-            steam_id: steamId,
-        },
-        select: {
-            players: true,
-        }
-    })
-
-    return Promise.resolve({ playerCount: Number(game?.players)})
-}
 
 export async function getPlayerCountTitle({steamId}: { steamId: SupportedGame }): Promise<{ playerCountTitle: string }> {
     const playerCountTitle: { [K in SupportedGame]: string } = {
         [GG_STRIVE]: 'guilty gears',
         [GG_PLUS_R]: 'guilty gears',
         [GG_XRD_REV2]: 'guilty gears',
-        [GBVSR]: 'skyfarers',
+        [GBVSR]: 'skyfarers', 
         [DNF_DUEL]: 'dungeon fighters',
         [UNI_2]: 'under night players',
         [SF6]: 'street fighters',
@@ -58,27 +25,16 @@ export async function getPlayerCountTitle({steamId}: { steamId: SupportedGame })
     return Promise.resolve({ playerCountTitle: playerCountTitle[steamId]})
 }
 
-export async function getAccolade({steamId}: { steamId: SupportedGame }) {
-    const gameDataFromDB = await prisma.games.findUnique({
-        where: {
-            steam_id: steamId,
-        },
-        include: {
-            accolades: {
-                select: {
-                    accolade: true // Only include the 'accolade' field from the 'accolades' table
-                }
-            }
-        }
-    });
-    return Promise.resolve({ accolade: gameDataFromDB?.accolades?.accolade })
+
+export async function getBannerImageURL({steamId}: { steamId: SupportedGame }) {
+    return Promise.resolve(`https://cdn.akamai.steamstatic.com/steam/apps/${steamId}/header.jpg`)
 }
 
-export async function getGameData({steamId, mocked = false}: { steamId: SupportedGame, mocked?: boolean }): Promise<Game | undefined> {
+export async function getGameData({steamId, mocked = false}: { steamId: SupportedGame, mocked?: boolean }): Promise<{ data: Game | undefined}> {
     const response = await fetch(`http://store.steampowered.com/api/appdetails?appids=${steamId}`)
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const data: SteamGameResponse = await response.json()
-    const originalGameData = data[steamId]
+    const steamData: SteamGameResponse = await response.json()
+    const originalGameData = steamData[steamId]
 
     if (mocked) {
         const mock = mockedGamesData[steamId as SupportedGame]
@@ -95,11 +51,11 @@ export async function getGameData({steamId, mocked = false}: { steamId: Supporte
             link: `https://store.steampowered.com/app/${steamId}/`,
         }
     
-        return Promise.resolve(mockedGameData)
+        return Promise.resolve({data: mockedGameData})
     }
 
     if (!originalGameData?.success) { 
-        return Promise.resolve(undefined)
+        return Promise.resolve({ data: undefined })
     }
 
     const gameDataFromDB = await prisma.games.findUnique({
@@ -111,7 +67,7 @@ export async function getGameData({steamId, mocked = false}: { steamId: Supporte
         }
     })
 
-    const gameData: Game =  {
+    const data: Game =  {
         id: String(gameDataFromDB?.steam_id.toString()),
         accolade: gameDataFromDB?.accolades?.accolade ?? '',
         name:  originalGameData?.data.name,
@@ -123,7 +79,24 @@ export async function getGameData({steamId, mocked = false}: { steamId: Supporte
         link: `https://store.steampowered.com/app/${steamId}/`
     }
 
-    return Promise.resolve(gameData)
+    return Promise.resolve({ data })
+}
+
+export async function getHomepageGames(): Promise<SupportedGame[]> {
+    const topTwoGames = await prisma.games.findMany({
+        orderBy: {
+            players: 'desc' 
+        },
+        select: {
+            steam_id: true
+        },
+        take: 2
+    });
+
+    
+    const games: SupportedGame[] = [...(topTwoGames.map((game) => Number(game.steam_id))), TEKKEN_8]
+
+    return Promise.resolve(games)
 }
 
 export async function getTotalPlayerCount(): Promise<{ totalPlayerCount: number }>  {
@@ -145,3 +118,20 @@ export async function getMostPlayedGameId(): Promise<{ steamId: SupportedGame }>
 
     return Promise.resolve({steamId: Number(gamesSortedByPlayers?.[0]?.steam_id)})
 }
+
+export async function getAccolade({steamId}: { steamId: SupportedGame }) {
+    const gameDataFromDB = await prisma.games.findUnique({
+        where: {
+            steam_id: steamId,
+        },
+        include: {
+            accolades: {
+                select: {
+                    accolade: true // Only include the 'accolade' field from the 'accolades' table
+                }
+            }
+        }
+    });
+    return Promise.resolve({ accolade: gameDataFromDB?.accolades?.accolade })
+}
+

@@ -9,6 +9,7 @@ import { getBannerImageURL, getGameData } from '@/server/steam-actions'
 import type { SupportedGame } from '@/index.enums'
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0
 
 export async function GameCard({
   steamId,

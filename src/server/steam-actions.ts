@@ -135,3 +135,16 @@ export async function getAccolade({steamId}: { steamId: SupportedGame }) {
     return Promise.resolve({ accolade: gameDataFromDB?.accolades?.accolade })
 }
 
+export async function getPlayerCount({steamId}: { steamId: SupportedGame }): Promise<{ playerCount: number }> {
+    const game = await prisma.games.findUnique({
+        where: {
+            steam_id: steamId,
+        },
+        select: {
+            players: true,
+        }
+    })
+
+    return Promise.resolve({ playerCount: Number(game?.players)})
+}
+

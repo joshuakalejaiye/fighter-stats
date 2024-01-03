@@ -1,5 +1,4 @@
-import type { SupportedGame } from '@/index.enums'
-import { prisma } from "@/server/db"
+import { getPlayerCount } from '@/server/steam-actions'
 
 export const dynamic = 'force-dynamic'
 export async function GET(request: Request, res: { params: { steamId: string }}) {
@@ -11,17 +10,4 @@ export async function GET(request: Request, res: { params: { steamId: string }})
     const data = await getPlayerCount({ steamId })
    
     return Response.json({ data })
-}
-
-export async function getPlayerCount({steamId}: { steamId: SupportedGame }): Promise<{ playerCount: number }> {
-    const game = await prisma.games.findUnique({
-        where: {
-            steam_id: steamId,
-        },
-        select: {
-            players: true,
-        }
-    })
-
-    return Promise.resolve({ playerCount: Number(game?.players)})
 }

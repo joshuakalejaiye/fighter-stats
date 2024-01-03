@@ -1,5 +1,3 @@
-import type { SupportedGame } from '@/index.enums'
-import { prisma } from "@/server/db"
 import { getAccolade } from '@/server/steam-actions'
 
 export const dynamic = 'force-dynamic'

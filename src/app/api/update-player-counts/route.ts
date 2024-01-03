@@ -1,8 +1,9 @@
-import type { Config } from '@netlify/functions'
 import { env } from 'src/env'
 import { SupportedGame } from '@/index.enums'
 import type { PlayerCountResponse } from '@/index'
 import { prisma } from '@/server/db'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 const getSteamPlayerCount = async ({
   steamId,
@@ -16,9 +17,7 @@ const getSteamPlayerCount = async ({
   return data.response.player_count
 }
 
-export default async (req: Request) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { next_run } = await req.json()
+export async function GET(request: NextRequest) {
   const last_updated = Date.now()
 
   for (const game in SupportedGame) {
@@ -41,9 +40,19 @@ export default async (req: Request) => {
     }
   }
 
-  console.log('Received event! Next invocation at:', next_run, last_updated)
-}
+  const date = new Date(last_updated * 1000); // convert timestamp to milliseconds and construct Date object
 
-export const config: Config = {
-  schedule: '@hourly',
+  console.log('Invoked at:', date)
+  
+  return NextResponse.json(
+    {
+      body: request.body,
+      path: request.nextUrl.pathname,
+      query: request.nextUrl.search,
+      cookies: request.cookies.getAll(),
+    },
+    {
+      status: 200,
+    },
+  );
 }

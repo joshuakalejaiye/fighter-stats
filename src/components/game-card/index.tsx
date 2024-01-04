@@ -22,6 +22,7 @@ export async function GameCard({
   if (!steamId) return <></>
   const { data } = await getGameData({ steamId, path: '/' })
   const hasPlayers = data?.playerCount && data?.playerCount > 0
+  const hasAccoladesOrTags = !!data?.accolade
   const gameComingSoon = data?.releaseDate.coming_soon
 
   return (
@@ -36,19 +37,16 @@ export async function GameCard({
         <CardHeader className={`h-0 pt-0`}>
         </CardHeader>
         <CardContent className="min-h-16">
-        <CardTitle className="text-3xl leading-7">
-        {data?.name}
-        
-
-
-        </CardTitle>
+          <CardTitle className="text-3xl leading-7 min-w-[350px] md:min-w-[800px] pr-2">
+          {data?.name}
+          </CardTitle>
           <CardDescription className='leading-7 ml-[0.2px] mb-[3px]'>{data?.developers}</CardDescription>
           <div 
           id={`${data?.id}-card-tags`} 
           className='flex gap-2 -ml-1' >
-            <div className='bg-black px-2 -mt-[2px] rounded-md'>
+            {hasAccoladesOrTags && <div className='bg-black px-2 -mt-[2px] rounded-md'>
               <p className='font-bold text-md'>{data?.accolade?.toUpperCase()}</p>
-            </div>
+            </div>}
           </div>
         {gameComingSoon && <p className='leading-7 bottom-2 absolute text-lime-400 text-sm font-bold'>{data?.releaseDate.date}</p>}        </CardContent>
         { hasPlayers ? 

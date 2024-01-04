@@ -9,7 +9,7 @@ export default async function Banner() {
         {totalPlayerCount?.toLocaleString(undefined)}
       </h1>
       <h2 className="-mt-6 pr-2 text-right text-xl font-bold md:-mt-12">
-        {'neutral skippers'}
+        {'fighting game players'}
       </h2>
     </div>
   )

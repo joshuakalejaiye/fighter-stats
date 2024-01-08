@@ -10,6 +10,7 @@ export const env = createEnv({
     STEAM_API_KEY: z.string(),
     DIRECT_URL: z.string().url(),
     DATABASE_URL: z.string().url(),
+    REVALIDATION_TIME: z.string(),
     NODE_ENV: z
       .enum(['development', 'test', 'production'])
       .default('development'),
@@ -33,6 +34,7 @@ export const env = createEnv({
     DIRECT_URL: process.env.DIRECT_URL,
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
+    REVALIDATION_TIME: process.env.REVALIDATION_TIME,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

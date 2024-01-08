@@ -10,6 +10,9 @@ import {
 import { prisma } from '@/server/db'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
+import { env } from '@/env'
+
+export const revalidate = Number(env.REVALIDATION_TIME)
 
 export async function GamesTable({ className }: { className?: string }) {
   const RowsWithData = async () => {

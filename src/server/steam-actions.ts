@@ -1,6 +1,5 @@
 import { SupportedGame } from '@/index.enums'
 import type { Game, SteamGameResponse } from '@/index'
-import mockedGamesData from '@/mocks/game-list.json'
 import { prisma } from './db'
 
 const {
@@ -23,7 +22,7 @@ export async function getPlayerCountTitle({
 }: {
   steamId: SupportedGame
 }): Promise<{ playerCountTitle: string }> {
-  const playerCountTitle: { [K in SupportedGame]: string } = {
+  const playerCountTitle: { [K in SupportedGame]?: string } = {
     [GG_STRIVE]: 'guilty gears',
     [GG_PLUS_R]: 'guilty gears',
     [GG_XRD_REV2]: 'guilty gears',
@@ -38,7 +37,9 @@ export async function getPlayerCountTitle({
     [RIVALS_2]: 'rivals brawling',
   }
 
-  return Promise.resolve({ playerCountTitle: playerCountTitle[steamId] })
+  return Promise.resolve({
+    playerCountTitle: playerCountTitle[steamId] ?? 'fighting game players',
+  })
 }
 
 export async function getBannerImageURL({
@@ -66,18 +67,19 @@ export async function getGameData({
   const originalGameData = steamData[steamId]
 
   if (mocked) {
-    const mock = mockedGamesData[steamId as SupportedGame]
-
     const mockedGameData: Game = {
       id: String(steamId),
       accolade: 'goodest mock data',
       tags: ['mock fighter'],
-      name: mock.name,
+      name: 'mock game name',
       image: await getBannerImageURL({ steamId }),
       developers: 'mocked_devs',
       playerCount: Number('000000'),
-      playerCountTitle: mock.playerCountTitle, //delegate
-      releaseDate: mock.releaseDate,
+      playerCountTitle: 'mocked game players', //delegate
+      releaseDate: {
+        coming_soon: false,
+        date: '24 Jan, 2024',
+      },
       link: `https://store.steampowered.com/app/${steamId}/`,
     }
 

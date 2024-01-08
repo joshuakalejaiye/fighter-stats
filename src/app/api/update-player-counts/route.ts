@@ -2,8 +2,8 @@ import { env } from 'src/env'
 import { SupportedGame } from '@/index.enums'
 import type { PlayerCountResponse } from '@/index'
 import { prisma } from '@/server/db'
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
 const getSteamPlayerCount = async ({
   steamId,
@@ -40,10 +40,10 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  const date = new Date(last_updated * 1000); // convert timestamp to milliseconds and construct Date object
+  const date = new Date(last_updated * 1000) // convert timestamp to milliseconds and construct Date object
 
   console.log('Invoked at:', date)
-  
+
   return NextResponse.json(
     {
       body: request.body,
@@ -53,6 +53,6 @@ export async function GET(request: NextRequest) {
     },
     {
       status: 200,
-    },
-  );
+    }
+  )
 }

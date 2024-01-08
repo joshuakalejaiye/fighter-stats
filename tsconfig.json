@@ -38,7 +38,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    ".next/types/**/*.ts"
-, "src/components/card-grid/index.tsz"  ],
+    ".next/types/**/*.ts",
+    "src/components/card-grid/index.tsz"
+  ],
   "exclude": ["node_modules"]
 }

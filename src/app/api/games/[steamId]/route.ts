@@ -11,7 +11,11 @@ export async function GET(
     return Response.json({ data: undefined })
   }
 
-  const { data } = await getGameData({ steamId, shouldRevalidate: false, path: '/' })
+  const { data } = await getGameData({
+    steamId,
+    shouldRevalidate: false,
+    path: '/',
+  })
 
   return Response.json({ data })
 }

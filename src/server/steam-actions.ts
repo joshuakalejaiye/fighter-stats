@@ -2,7 +2,6 @@ import { SupportedGame } from '@/index.enums'
 import type { Game, SteamGameResponse } from '@/index'
 import mockedGamesData from '@/mocks/game-list.json'
 import { prisma } from './db'
-import { revalidatePath } from 'next/cache'
 
 const {
   DNF_DUEL,
@@ -59,8 +58,8 @@ export async function getGameData({
   mocked = false,
 }: {
   steamId: SupportedGame
-  path: string,
-  shouldRevalidate?: boolean,
+  path: string
+  shouldRevalidate?: boolean
   mocked?: boolean
 }): Promise<{ data: Game | undefined }> {
   const response = await fetch(
@@ -102,7 +101,7 @@ export async function getGameData({
   })
 
   if (shouldRevalidate) {
-    revalidatePath(path)
+    path
   }
 
   const data: Game = {
@@ -133,8 +132,6 @@ export async function getHomepageGames(): Promise<{ games: SupportedGame[] }> {
     take: 2,
   })
 
-  revalidatePath('/')
-
   const games: SupportedGame[] = [
     ...topTwoGames.map((game) => Number(game.steam_id)),
     TEKKEN_8,
@@ -152,8 +149,6 @@ export async function getTotalPlayerCount(): Promise<{
     },
   })
 
-  revalidatePath('/')
-
   return Promise.resolve({ totalPlayerCount: Number(gameData._sum.players) })
 }
 
@@ -165,8 +160,6 @@ export async function getMostPlayedGameId(): Promise<{
       players: 'desc',
     },
   })
-
-  revalidatePath('/')
 
   return Promise.resolve({
     steamId: Number(gamesSortedByPlayers?.[0]?.steam_id),
@@ -187,8 +180,6 @@ export async function getAccolade({ steamId }: { steamId: SupportedGame }) {
     },
   })
 
-  revalidatePath('/')
-
   return Promise.resolve({ accolade: gameDataFromDB?.accolades?.accolade })
 }
 
@@ -205,8 +196,6 @@ export async function getPlayerCount({
       players: true,
     },
   })
-
-  revalidatePath('/')
 
   return Promise.resolve({ playerCount: Number(game?.players) })
 }

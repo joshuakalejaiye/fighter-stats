@@ -11,6 +11,9 @@ export enum SupportedGame {
   TEKKEN_8 = 1778820,
   SOULCALIBUR_VI = 544750,
   RIVALS_2 = 2217000,
+  MK_11 = 976310,
+  MK_1 = 1971870,
+  UNI_CLR = 801630,
 }
 
 export const {

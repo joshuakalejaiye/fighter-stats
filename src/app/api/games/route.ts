@@ -14,7 +14,7 @@ export async function GET() {
       continue
     }
 
-    const { data: gameData } = await getGameData({ steamId, path: '/' })
+    const { data: gameData } = await getGameData({ steamId })
 
     if (gameData) {
       data.push(gameData)

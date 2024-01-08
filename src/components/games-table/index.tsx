@@ -30,7 +30,10 @@ export async function GamesTable({ className }: { className?: string }) {
           </TableCell>
           <TableCell className="text-white">{game.name}</TableCell>
           <TableCell className="text-lime-400 underline text-center w-0">
-            <a href={`https://steamcharts.com/app/${game.steam_id}`}>
+            <a
+              href={`https://steamcharts.com/app/${game.steam_id}`}
+              target="blank"
+            >
               <Button variant={'ghost'} className="bg-black text-white">
                 Link
               </Button>

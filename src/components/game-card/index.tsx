@@ -31,6 +31,7 @@ export async function GameCard({
     <a
       href={data?.link}
       key={steamId}
+      target="blank"
       className={`relative text-white min-w-full md:min-w-[350px] ${className} mt-16 max-h-[230px] md:pb-10`}
     >
       <div

@@ -29,7 +29,7 @@ export async function GameCard({
     <a
       href={data?.link}
       key={steamId}
-      className={`relative text-white min-w-full ${className} mt-16 max-h-[230px] md:pb-10`}
+      className={`relative text-white min-w-full md:min-w-[350px] ${className} mt-16 max-h-[230px] md:pb-10`}
     >
       <div
         className={`absolute -top-16 left-[0.5px] right-[0.5px] min-h-[120px] md:-top-24 rounded-xl bg-cover bg-center ${imageClassName}`}
@@ -44,7 +44,7 @@ export async function GameCard({
       >
         <CardHeader className={`h-0 pt-0`}></CardHeader>
         <CardContent className="min-h-16">
-          <CardTitle className="text-3xl leading-7 min-w-[350px] md:min-w-[800px] pr-2">
+          <CardTitle className="text-3xl leading-7 min-w-full md:min-w-[350px] pr-2">
             {data?.name}
           </CardTitle>
           <CardDescription className="leading-7 ml-[0.2px] mb-[3px]">

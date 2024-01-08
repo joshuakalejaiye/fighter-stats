@@ -20,7 +20,7 @@ export default async function HomePage() {
   const secondGameId = Number(two?.steam_id)
 
   return (
-    <div className="max-w-[800px] flex grid-cols-2 grid-rows-2 flex-col gap-x-4 gap-y-6 mt-14 md:mt-36 md:grid">
+    <div className="max-w-[800px] min-w-full md:min-w-[700px] flex grid-cols-2 grid-rows-2 flex-col gap-x-4 gap-y-6 mt-14 md:mt-36 md:grid">
       <GameCard
         key={firstGameId}
         steamId={firstGameId}

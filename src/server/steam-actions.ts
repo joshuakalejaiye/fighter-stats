@@ -100,13 +100,12 @@ export async function getGameData({
   })
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const tagData = gameDataFromDB?.tags as { data: string[] } | undefined
-  console.log(gameDataFromDB)
+  const tagsData = gameDataFromDB?.tags as { data: string[] } | undefined
 
   const data: Game = {
     id: String(gameDataFromDB?.steam_id.toString()),
     accolade: gameDataFromDB?.accolades?.accolade ?? '',
-    tags: tagData?.data,
+    tags: tagsData?.data,
     name: originalGameData?.data.name,
     image:
       gameDataFromDB?.image_link?.toString() ??

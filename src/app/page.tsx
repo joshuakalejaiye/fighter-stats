@@ -2,6 +2,8 @@ import Banner from '@/components/banner'
 import CardGrid from '@/components/card-grid'
 import { GamesTable } from '@/components/games-table'
 
+export const revalidate = 60
+
 export default async function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-white dark:bg-black">

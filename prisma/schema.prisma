@@ -21,6 +21,7 @@ model games {
   last_updated BigInt?
   image_link   String?
   accolade     BigInt?
+  tags         Json?
   accolades    accolades? @relation(fields: [accolade], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([players], map: "idx_players")

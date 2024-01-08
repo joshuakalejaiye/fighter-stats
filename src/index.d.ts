@@ -1,6 +1,7 @@
 interface Game {
   id: string
   accolade?: string
+  tags: string[] | undefined
   image: string
   name: string
   developers: string

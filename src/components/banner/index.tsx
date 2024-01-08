@@ -1,7 +1,4 @@
 import { getTotalPlayerCount } from '@/server/steam-actions'
-import { env } from '@/env'
-
-export const revalidate = Number(env.REVALIDATION_TIME)
 
 export default async function Banner() {
   const { totalPlayerCount } = await getTotalPlayerCount()

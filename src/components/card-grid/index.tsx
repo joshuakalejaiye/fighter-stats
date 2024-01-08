@@ -1,11 +1,8 @@
 import { GameCard } from '../game-card'
 import { prisma } from '@/server/db'
 import { TEKKEN_8 } from '@/index.enums'
-import { env } from '@/env'
 
-export const revalidate = Number(env.REVALIDATION_TIME)
-
-export default async function HomePage() {
+export default async function CardGrid() {
   const [one, two] = await prisma.games.findMany({
     orderBy: {
       players: 'desc',

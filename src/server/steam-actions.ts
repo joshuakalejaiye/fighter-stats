@@ -75,6 +75,7 @@ export async function getGameData({
     const mockedGameData: Game = {
       id: String(steamId),
       accolade: 'goodest mock data',
+      tags: ['mock fighter'],
       name: mock.name,
       image: await getBannerImageURL({ steamId }),
       developers: 'mocked_devs',
@@ -100,13 +101,14 @@ export async function getGameData({
     },
   })
 
-  if (shouldRevalidate) {
-    path
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const tagData = gameDataFromDB?.tags as { data: string[] } | undefined
+  console.log(gameDataFromDB)
 
   const data: Game = {
     id: String(gameDataFromDB?.steam_id.toString()),
     accolade: gameDataFromDB?.accolades?.accolade ?? '',
+    tags: tagData?.data,
     name: originalGameData?.data.name,
     image:
       gameDataFromDB?.image_link?.toString() ??

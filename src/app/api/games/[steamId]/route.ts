@@ -13,8 +13,6 @@ export async function GET(
 
   const { data } = await getGameData({
     steamId,
-    shouldRevalidate: false,
-    path: '/',
   })
 
   return Response.json({ data })

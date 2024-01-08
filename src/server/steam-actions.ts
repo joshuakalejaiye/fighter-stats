@@ -53,13 +53,9 @@ export async function getBannerImageURL({
 
 export async function getGameData({
   steamId,
-  path,
-  shouldRevalidate = true,
   mocked = false,
 }: {
   steamId: SupportedGame
-  path: string
-  shouldRevalidate?: boolean
   mocked?: boolean
 }): Promise<{ data: Game | undefined }> {
   const response = await fetch(

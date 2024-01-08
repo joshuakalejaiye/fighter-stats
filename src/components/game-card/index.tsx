@@ -19,7 +19,7 @@ export async function GameCard({
   imageClassName?: string
 }) {
   if (!steamId) return <></>
-  const { data } = await getGameData({ steamId, path: '/' })
+  const { data } = await getGameData({ steamId })
   const gameComingSoon = data?.releaseDate.coming_soon
   const hasPlayers =
     data?.playerCount && data?.playerCount > 0 && !gameComingSoon

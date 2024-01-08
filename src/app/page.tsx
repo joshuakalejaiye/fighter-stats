@@ -2,7 +2,7 @@ import Banner from '@/components/banner'
 import CardGrid from '@/components/card-grid'
 import { GamesTable } from '@/components/games-table'
 
-export const revalidate = 600
+export const revalidate = 60
 
 export default async function HomePage() {
   return (

@@ -73,7 +73,7 @@ export async function GameCard({
           </div>
           {gameComingSoon && (
             <p className="uppercase leading-7 bottom-2 absolute text-lime-400 text-sm font-bold">
-              Releasing in {data?.releaseDate.date}
+              {data?.releaseDate.date ?? 'Coming Soon'}
             </p>
           )}
         </CardContent>

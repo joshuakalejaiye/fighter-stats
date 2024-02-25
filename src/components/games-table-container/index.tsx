@@ -6,7 +6,6 @@ export async function GamesTableContainer({
 }: {
   className?: string
 }) {
-  'use server'
   const gamesSortedByPlayers = await prisma.games.findMany({
     orderBy: {
       players: 'desc',

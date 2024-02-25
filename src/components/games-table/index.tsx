@@ -54,6 +54,7 @@ export async function GamesTable({
                     >
                       <Button
                         variant={'outline'}
+                        size={'sm'}
                         className="bg-black text-white"
                       >
                         Charts

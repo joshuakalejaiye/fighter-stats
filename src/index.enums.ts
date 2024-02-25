@@ -14,6 +14,8 @@ export enum SupportedGame {
   MK_11 = 976310,
   MK_1 = 1971870,
   UNI_CLR = 801630,
+  SPARKING_ZERO = 1790600,
+  TYPE_LUMINA = 1372280,
 }
 
 export const {
@@ -29,4 +31,6 @@ export const {
   TEKKEN_8,
   SOULCALIBUR_VI,
   RIVALS_2,
+  SPARKING_ZERO,
+  TYPE_LUMINA,
 } = SupportedGame

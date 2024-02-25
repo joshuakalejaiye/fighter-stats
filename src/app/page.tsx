@@ -1,6 +1,6 @@
 import PlayerCountBanner from '@/components/player-count-banner'
 import CardGrid from '@/components/card-grid'
-import { GamesTableContainer } from '@/components/games-table'
+import { GamesTableContainer } from '@/components/games-table-container'
 
 export const revalidate = 0
 

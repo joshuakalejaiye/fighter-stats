@@ -1,4 +1,5 @@
-// Import necessary components and libraries
+'use client'
+
 import {
   Table,
   TableBody,
@@ -6,28 +7,11 @@ import {
   TableCell,
   TableRow,
 } from '@/components/ui/table'
-import { prisma } from '@/server/db'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
 
-// This component fetches game data and renders the GamesTable component
-export async function GamesTableContainer({
-  className,
-}: {
-  className?: string
-}) {
-  'use server'
-  const gamesSortedByPlayers = await prisma.games.findMany({
-    orderBy: {
-      players: 'desc',
-    },
-  })
-
-  return <GamesTable className={className} games={gamesSortedByPlayers} />
-}
-
 // The GamesTable component, now receiving fetched games as props
-async function GamesTable({
+export async function GamesTable({
   className,
   games,
 }: {

@@ -17,7 +17,7 @@ export async function GamesTable({ className }: { className?: string }) {
   })
 
   return (
-    <div className="w-screen px-6 pt-12 md:max-w-[800px] md:px-0">
+    <div className="w-screen px-4 pt-12 md:max-w-[800px] md:px-0">
       <Card className={`md:px-8 pt-4 ${className}`}>
         <CardContent>
           <CardHeader>

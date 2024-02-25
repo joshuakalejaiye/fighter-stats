@@ -16,6 +16,9 @@ module.exports = {
       },
     },
     extend: {
+      colors: {
+        'near-black': '#121212',
+      },
       keyframes: {
         'accordion-down': {
           from: { height: 0 },

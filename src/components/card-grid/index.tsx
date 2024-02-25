@@ -2,25 +2,14 @@ import { GameCard } from '../game-card'
 import { prisma } from '@/server/db'
 
 export default async function CardGrid() {
-  const [mostPopular] = await prisma.games.findMany({
+  const [mostPopular, secondMostPopular] = await prisma.games.findMany({
     orderBy: {
       players: 'desc',
     },
     select: {
       steam_id: true,
     },
-    take: 1,
-  })
-
-  const onTheRise = await prisma.games.findFirst({
-    where: {
-      accolades: {
-        accolade: 'on the rise',
-      },
-    },
-    select: {
-      steam_id: true,
-    },
+    take: 2,
   })
 
   const mostAnticipated = await prisma.games.findFirst({
@@ -35,7 +24,7 @@ export default async function CardGrid() {
   })
 
   const firstGameId = Number(mostPopular?.steam_id)
-  const secondGameId = Number(onTheRise?.steam_id)
+  const secondGameId = Number(secondMostPopular?.steam_id)
   const thirdGameId = Number(mostAnticipated?.steam_id)
 
   return (
@@ -47,7 +36,7 @@ export default async function CardGrid() {
         imageClassName="-mt-10 min-h-[180px]"
       />
       {[secondGameId, thirdGameId].map((steamId) => (
-        <GameCard key={steamId} steamId={steamId} />
+        <GameCard key={`${steamId}-card`} steamId={steamId} />
       ))}
     </div>
   )

@@ -1,6 +1,6 @@
 import PlayerCountBanner from '@/components/player-count-banner'
 import CardGrid from '@/components/card-grid'
-import { GamesTableContainer } from '@/components/games-table-container'
+import { GamesTable } from '@/components/games-table'
 
 export const revalidate = 0
 
@@ -10,7 +10,7 @@ export default async function HomePage() {
       <div className="container mt-6 flex flex-col items-center justify-center gap-12 px-4 py-16 min-w-full">
         <PlayerCountBanner />
         <CardGrid />
-        <GamesTableContainer />
+        <GamesTable />
         <footer>
           <a
             className="text-neutral-200 text-sm underline"

@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Table,
   TableBody,
@@ -9,24 +7,17 @@ import {
 } from '@/components/ui/table'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
+import { prisma } from '@/server/db'
 
-// The GamesTable component, now receiving fetched games as props
-export async function GamesTable({
-  className,
-  games,
-}: {
-  className?: string
-  games: {
-    steam_id: bigint
-    name: string | null
-    players: bigint
-    last_updated: bigint | null
-    image_link: string | null
-    accolade: bigint | null
-  }[]
-}) {
+export async function GamesTable({ className }: { className?: string }) {
+  const games = await prisma.games.findMany({
+    orderBy: {
+      players: 'desc',
+    },
+  })
+
   return (
-    <div className="w-screen px-8 pt-12 md:max-w-[800px] md:px-0">
+    <div className="w-screen px-6 pt-12 md:max-w-[800px] md:px-0">
       <Card className={`md:px-8 pt-4 ${className}`}>
         <CardContent>
           <CardHeader>

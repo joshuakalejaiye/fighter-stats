@@ -8,15 +8,19 @@ import {
 } from '@/components/ui/card'
 import { getGameData } from '@/server/steam-actions'
 import type { SupportedGame } from '@/index.enums'
+import { type ReactNode } from 'react'
+import Link from 'next/link'
 
 export async function GameCard({
   steamId,
   className,
   imageClassName,
+  link = true,
 }: {
   steamId?: SupportedGame
   className?: string
   imageClassName?: string
+  link?: boolean
 }) {
   if (!steamId) return <></>
   const { data } = await getGameData({ steamId })
@@ -27,12 +31,21 @@ export async function GameCard({
   const allTags = data?.tags && [data?.accolade, ...data?.tags]
   const hasAccoladesOrTags = data?.tags ?? (data?.accolade && allTags)
 
+  const Container = (props: {
+    href: string
+    className: string
+    children: ReactNode
+  }) =>
+    link ? (
+      <Link {...props}>{props.children}</Link>
+    ) : (
+      <div {...props}>{props.children}</div>
+    )
+
   return (
-    <a
-      href={data?.link}
+    <Container
+      href={`/games/${steamId}`}
       key={steamId}
-      target="blank"
-      rel="noopener noreferrer"
       className={`relative text-white min-w-full md:min-w-[350px] ${className} mt-16 max-h-[230px] md:pb-10`}
     >
       <div
@@ -86,6 +99,6 @@ export async function GameCard({
           </CardFooter>
         ) : null}
       </Card>
-    </a>
+    </Container>
   )
 }

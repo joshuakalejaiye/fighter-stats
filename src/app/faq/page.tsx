@@ -22,8 +22,7 @@ export default async function Faq() {
 
   return (
     <ContentSection className="">
-      <h1 className="text-5xl font-semibold pl-4 pb-4 text-left">FAQ</h1>
-
+      <h1 className="text-5xl font-semibold pl-4 text-left">FAQ</h1>
       <div className="p-4 pb-8">
         <Questions questions={questions} />
       </div>

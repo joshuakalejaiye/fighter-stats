@@ -3,7 +3,7 @@ import {
   getMostPlayedGameId,
   getPlayerCountTitle,
   getTotalPlayerCount,
-} from '@/server/steam-actions'
+} from '@/server/data/steam'
 
 export const dynamic = 'force-dynamic'
 

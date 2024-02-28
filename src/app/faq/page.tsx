@@ -6,10 +6,10 @@ export default async function Faq() {
     {
       question: `"Aren't these numbers lower than they should be ?"`,
       answer:
-        'This only takes PC data into account, if Xbox and PlayStation ever decide to play nice and share their player numbers, I’ll add them to this.',
+        'This only takes PC data into account; if Xbox and PlayStation ever decide to play nice and share their player numbers, I’ll add them to this.',
     },
     {
-      question: `"Why isn't my favourite game here"`,
+      question: `"Why isn't my favourite game here ?"`,
       answer:
         'I’m sorry. It either isn’t on Steam or I had to prioritise other games, there is a limit on how many I can keep track of right now.',
     },

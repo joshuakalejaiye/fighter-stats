@@ -1,6 +1,7 @@
+'use server'
 import { SupportedGame } from '@/index.enums'
 import type { Game, SteamGameResponse } from '@/index'
-import { prisma } from './db'
+import { prisma } from '../db'
 
 const {
   DNF_DUEL,

@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { getGameData } from '@/server/steam-actions'
+import { getGameData } from '@/server/data/steam'
 import type { SupportedGame } from '@/index.enums'
 import { type ReactNode } from 'react'
 import Link from 'next/link'

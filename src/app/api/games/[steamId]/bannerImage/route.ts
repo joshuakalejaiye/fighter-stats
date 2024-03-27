@@ -1,4 +1,4 @@
-import { getBannerImageURL } from '@/server/steam-actions'
+import { getBannerImageURL } from '@/server/data/steam'
 
 export const dynamic = 'force-dynamic'
 export async function GET(

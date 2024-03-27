@@ -1,4 +1,4 @@
-import { getTotalPlayerCount } from '@/server/steam-actions'
+import { getTotalPlayerCount } from '@/server/data/steam'
 
 export default async function PlayerCountBanner() {
   const { totalPlayerCount } = await getTotalPlayerCount()

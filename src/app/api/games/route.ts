@@ -1,6 +1,6 @@
 import type { Game } from '@/index'
 import { SupportedGame } from '@/index.enums'
-import { getGameData } from '@/server/steam-actions'
+import { getGameData } from '@/server/data/steam'
 
 export const dynamic = 'force-dynamic'
 

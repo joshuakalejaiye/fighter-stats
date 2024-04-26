@@ -30,7 +30,7 @@ export default async function Game({
               alt={''}
             />
           </div> */}
-          <div className="w-42 flex items-end justify-end pb-4">
+          <div className="hidden md:flex w-42 items-end justify-end pb-4">
             {imageUrl && (
               <img
                 className={

@@ -44,20 +44,21 @@ export async function NicerGameCard({
       <div {...props}>{props.children}</div>
     )
 
+  const hiddenImageStyle = `absolute md:hidden -top-16 left-[0.5px] right-[0.5px] min-h-[120px] bg-cover bg-center ${imageClassName}`
+  const imageStyle = `absolute -top-16 left-[0.5px] right-[0.5px] min-h-[120px] bg-cover bg-center ${imageClassName}`
+
   return (
     <Container
       href={`/games/${steamId}`}
       key={steamId}
-      className={`relative text-white min-w-full md:min-w-[350px] md:max-w-[390px] ${className} mt-16 max-h-[280px] md:pb-4`}
+      className={`relative text-white min-w-full md:min-w-[350px] md:max-w-[390px] ${className} mt-16 max-h-[280px] pb-4`}
     >
-      {image && (
-        <div
-          className={`absolute -top-12 left-[0.5px] right-[0.5px] min-h-[120px] bg-cover bg-center ${imageClassName}`}
-          style={{
-            backgroundImage: `url(${data?.image})`,
-          }}
-        ></div>
-      )}
+      <div
+        className={!image ? hiddenImageStyle : imageStyle}
+        style={{
+          backgroundImage: `url(${data?.image})`,
+        }}
+      ></div>
       <Card
         className={`relative min-w-full pb-4 ${
           hasPlayers ? 'min-h-[235px]' : ''

@@ -13,6 +13,11 @@ const config = {
         hostname: 'cdn.akamai.steamstatic.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'nichegamer.com',
+        port: '',
+      },
     ],
   },
 }

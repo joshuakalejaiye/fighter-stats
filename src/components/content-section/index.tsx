@@ -9,7 +9,7 @@ export default async function ContentSection({
 }>) {
   return (
     <div
-      className={`w-screen px-4 pt-12 md:max-w-[800px] md:px-0 ${className}`}
+      className={`w-screen px-4 pt-12 md:max-w-[850px] md:px-0 ${className}`}
     >
       {children}
     </div>

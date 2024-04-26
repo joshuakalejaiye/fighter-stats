@@ -2,8 +2,8 @@ import ContentSection from '@/components/content-section'
 import { NicerGameCard } from '@/components/nicer-game-card'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-// import { getBannerImageURL } from '@/server/data/steam'
-// import Image from 'next/image'
+import { getGameData } from '@/server/data/steam'
+import { getBannerImageURL } from '@/server/data/steam'
 
 export default async function Game({
   params,
@@ -12,27 +12,38 @@ export default async function Game({
 }) {
   const { steamId: id } = params
   const steamId = Number(id)
-  // const imageUrl = await getBannerImageURL({ steamId })
+  const imageUrl = await getBannerImageURL({ steamId })
   const platforms = ['PC', 'PS5']
   const wiki = 'linktowiki'
+  if (!steamId) return <></>
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-white dark:bg-black">
       <ContentSection>
-        <div className="flex flex-row-reverse">
+        <div className="flex flex-row gap-x-4">
           {/* <div className="bg-cover">
             <Image
               width={500}
               height={600}
-              className={'m-4 '}
+              className={'m-4'}
               src={imageUrl}
               alt={''}
             />
           </div> */}
+          <div className="w-42 flex items-end justify-end pb-4">
+            {imageUrl && (
+              <img
+                className={
+                  'object-cover p-0 h-72 border-[1px] border-neutral-700'
+                }
+                src={imageUrl}
+                alt={''}
+              />
+            )}
+          </div>
           <NicerGameCard
             key={steamId}
             steamId={steamId}
-            imageClassName="-mt-10 min-h-[180px]"
             link={false}
             image={false}
           />

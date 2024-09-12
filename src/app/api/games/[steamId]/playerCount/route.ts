@@ -1,4 +1,4 @@
-import { getPlayerCount } from '@/server/steam-actions'
+import { getPlayerCount } from '@/server/data/steam'
 
 export const dynamic = 'force-dynamic'
 export async function GET(

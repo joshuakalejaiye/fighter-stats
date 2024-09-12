@@ -8,8 +8,11 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
 import { prisma } from '@/server/db'
+import ContentSection from '../content-section'
 
-export async function GamesTable({ className }: { className?: string }) {
+export async function GamesTable({
+  className,
+}: Readonly<{ className?: string }>) {
   const games = await prisma.games.findMany({
     orderBy: {
       players: 'desc',
@@ -17,8 +20,8 @@ export async function GamesTable({ className }: { className?: string }) {
   })
 
   return (
-    <div className="w-screen px-4 pt-12 md:max-w-[800px] md:px-0">
-      <Card className={`md:px-8 pt-4 ${className}`}>
+    <ContentSection>
+      <Card className={`md:px-8 pt-4 pb-4 ${className}`}>
         <CardContent>
           <CardHeader>
             <CardTitle className="text-3xl text-left">All Games</CardTitle>
@@ -58,6 +61,6 @@ export async function GamesTable({ className }: { className?: string }) {
           </Table>
         </CardContent>
       </Card>
-    </div>
+    </ContentSection>
   )
 }

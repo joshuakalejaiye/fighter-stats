@@ -1,4 +1,4 @@
-import { getGameData } from '@/server/steam-actions'
+import { getGameData } from '@/server/data/steam'
 
 export const dynamic = 'force-dynamic'
 

@@ -1,4 +1,4 @@
-import { getAccolade } from '@/server/steam-actions'
+import { getAccolade } from '@/server/data/steam'
 
 export const dynamic = 'force-dynamic'
 export async function GET(

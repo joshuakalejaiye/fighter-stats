@@ -15,6 +15,9 @@ const {
   TEKKEN_7,
   TEKKEN_8,
   UNI_2,
+  SPARKING_ZERO,
+  TYPE_LUMINA,
+  MVC2
 } = SupportedGame
 
 export async function getPlayerCountTitle({

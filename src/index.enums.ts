@@ -16,6 +16,7 @@ export enum SupportedGame {
   UNI_CLR = 801630,
   SPARKING_ZERO = 1790600,
   TYPE_LUMINA = 1372280,
+  MVC2 = 2634890
 }
 
 export const {
@@ -33,4 +34,5 @@ export const {
   RIVALS_2,
   SPARKING_ZERO,
   TYPE_LUMINA,
+  MVC2
 } = SupportedGame

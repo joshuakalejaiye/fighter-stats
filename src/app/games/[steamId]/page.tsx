@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardTitle } from '@/components/ui/card'
 import { getGameData } from '@/server/data/steam'
 import { getBannerImageURL } from '@/server/data/steam'
+import { TwitterEmbed } from './twitter-embed'
 
 export default async function Game({
   params,
@@ -16,6 +17,7 @@ export default async function Game({
   const platforms = ['PC', 'PS5']
   const wiki = 'linktowiki'
   const GBVS_TWITTER = 'gbvs_official'
+  const TEKKEN_TWITTER = 'TEKKEN'
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-white dark:bg-black">
@@ -74,19 +76,7 @@ export default async function Game({
           </div>
           <Card className="m-4 flex-column items-center w-full border-0">
             <div className="w-full text-center">
-              <a
-                class="twitter-timeline"
-                data-height="1600"
-                data-theme="dark"
-                href={`https://twitter.com/${GBVS_TWITTER}?ref_src=twsrc%5Etfw`}
-              >
-                ...Loading Tweets
-              </a>
-              <script
-                async
-                src="https://platform.twitter.com/widgets.js"
-                charset="utf-8"
-              ></script>
+              <TwitterEmbed />
             </div>
           </Card>
         </Card>

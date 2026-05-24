@@ -31,18 +31,21 @@ export async function GameCard({
     <a
       href={data?.link}
       key={steamId}
-      target="blank"
+      target="_blank"
       rel="noopener noreferrer"
+      aria-label={`View ${data?.name} on Steam`}
       className={`relative text-white min-w-full md:min-w-[350px] ${className} mt-16 max-h-[230px] md:pb-10`}
     >
       <div
+        role="img"
+        aria-label={data?.name}
         className={`absolute -top-16 left-[0.5px] right-[0.5px] min-h-[120px] md:-top-24 bg-cover bg-center ${imageClassName}`}
         style={{
           backgroundImage: `url(${data?.image})`,
         }}
       ></div>
       <Card
-        className={`relative min-w-full pb-4 ${
+        className={`relative min-w-full pb-8 ${
           hasPlayers ? 'min-h-[170px]' : ''
         }`}
       >
@@ -78,7 +81,7 @@ export async function GameCard({
           )}
         </CardContent>
         {hasPlayers ? (
-          <CardFooter className="flex absolute bottom-0 px-6 pb-3 gap-[0.3rem] text-lime-400">
+          <CardFooter className="flex absolute bottom-0 px-6 pt-3 pb-3 gap-[0.3rem] text-lime-400">
             <p className="text-3xl font-bold">
               {data?.playerCount.toLocaleString()}
             </p>

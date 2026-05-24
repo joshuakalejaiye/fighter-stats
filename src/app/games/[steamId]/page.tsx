@@ -14,6 +14,7 @@ export default async function Game({
     },
     select: {
       image_link: true,
+      name: true,
     },
   })
 
@@ -21,7 +22,7 @@ export default async function Game({
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-white dark:bg-black">
-      <Image src={res?.image_link ?? ''} alt="hi" width={300} height={300} />
+      <Image src={res?.image_link ?? ''} alt={res.name ?? 'Game cover image'} width={300} height={300} />
     </main>
   )
 }

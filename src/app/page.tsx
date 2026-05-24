@@ -16,6 +16,7 @@ export default async function HomePage() {
             className="text-neutral-200 text-sm underline"
             href={'https://www.joshuakal.dev'}
             target="_blank"
+            rel="noopener noreferrer"
           >
             made by joshuakalejaiye
           </a>

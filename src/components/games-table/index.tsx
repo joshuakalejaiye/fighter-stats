@@ -3,6 +3,8 @@ import {
   TableBody,
   TableCaption,
   TableCell,
+  TableHead,
+  TableHeader,
   TableRow,
 } from '@/components/ui/table'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
@@ -25,6 +27,15 @@ export async function GamesTable({ className }: { className?: string }) {
           </CardHeader>
           <Table>
             <TableCaption>updates hourly</TableCaption>
+            <TableHeader className="sr-only">
+              <TableRow className="sr-only">
+                <TableHead>Game</TableHead>
+                <TableHead>Players</TableHead>
+                <TableHead>
+                  <span>Links</span>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
             <TableBody>
               {games.map((game) => (
                 <TableRow
@@ -38,19 +49,21 @@ export async function GamesTable({ className }: { className?: string }) {
                     {game.players.toLocaleString()}
                   </TableCell>
                   <TableCell className="text-lime-400 underline text-center w-0">
-                    <a
-                      href={`https://steamcharts.com/app/${game.steam_id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Button
+                      variant={'outline'}
+                      size={'sm'}
+                      className="bg-black text-white"
+                      asChild
                     >
-                      <Button
-                        variant={'outline'}
-                        size={'sm'}
-                        className="bg-black text-white"
+                      <a
+                        href={`https://steamcharts.com/app/${game.steam_id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View Steam Charts for ${game.name}`}
                       >
                         Charts
-                      </Button>
-                    </a>
+                      </a>
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

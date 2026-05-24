@@ -38,7 +38,7 @@ export async function GameCard({
     >
       <div
         role="img"
-        aria-label={data?.name}
+        aria-label={`${data?.name} ${data?.name ? 'banner' : 'Game banner'}`}
         className={`absolute -top-16 left-[0.5px] right-[0.5px] min-h-[120px] md:-top-24 bg-cover bg-center ${imageClassName}`}
         style={{
           backgroundImage: `url(${data?.image})`,
